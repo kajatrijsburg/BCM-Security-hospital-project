@@ -7,3 +7,5 @@ Het doel is om een aantal basis technieken te laten zien
   1. verbinding maken met MySQL database
   1. een beveiligde pagina (/intranet) maken waarbij ingelogd moet worden via BasicAuth
   
+Deze website staat op de Virtuele Machine die studenten aangeleverd krijgen. Je vind deze broncode in de map
+`/var/www/energy`. 
