@@ -5,12 +5,6 @@
 <body>
   <pre><code>
 <?php
-/**
- * Created by PhpStorm.
- * User: martin
- * Date: 1-3-2019
- * Time: 10:26
- */
 
 include_once "ldap_constants.inc.php";
 include_once "ldap_support.inc.php";
@@ -39,12 +33,15 @@ $givenName = $_POST['voornaam'];
 
 // setup some compound variables based upon the input
 $cn = $sn . " " . $givenName;
-$newUserDN = "cn=" . $cn . "," . USERS_DN;
+$newUserDN = "cn=" . $cn . "," . USERS_INTERN_DN;
 
+
+// FIXME: first check if user already exists.
 try {
     CreateNewUser($lnk, $newUserDN, $cn, $sn, $username, $givenName);
+    echo "Gebruiker aangemaakt met DN=$newUserDN \n";
 } catch (Exception $exception) {
-
+  // FIXME: do something with the exception;
 }
 echo "Gebruiker toegevoegd!\n";
 
@@ -57,12 +54,14 @@ try {
 }
 
 // Add user to a certain group ("CN=websiteusers")
-$groupDN = "cn=websiteusers, " . GROUPS_DN;
+$groupDN = GROUPS_DN;
 try {
     AddUserToGroup($lnk, $groupDN, $newUserDN);
 } catch (Exception $exception) {
     die ($exception->getCode() . ":" . $exception->getMessage());
 }
+
+echo "Gelukt!";
 
 ?>
         </code>
