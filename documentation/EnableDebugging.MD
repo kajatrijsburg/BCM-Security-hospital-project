@@ -4,7 +4,7 @@ First install XDebug for PHP:
 
 `sudo apt install php-xdebug`
 
-Make sure configuratoin for XDebug is stored in the file
+Make sure configuration for XDebug is stored in the file
 
 `/etc/php/7.4/apache2/conf.d/20-xdebug.conf`
 
