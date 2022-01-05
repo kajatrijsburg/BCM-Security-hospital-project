@@ -28,6 +28,9 @@
             ?>
         </section>
         <section>
+            <P>Gebruik onderstaande formulier om een nieuwe gebruiker aan te maken. De afhandeling van het aanmaken van
+                deze gebruiker vindt plaats via het script 'createNewUser.php'.
+            </P>
             <form action="createNewUser.php" method="post">
                 <label for="idUserName">Gebruikersnaam</label>
                 <input type="text" name="username" id="idUserName">
