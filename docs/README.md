@@ -52,3 +52,9 @@ en daar wijzigingen op uit te voeren.
 Dit voorbeeld vindt je in `./intranet/createNewUser.php`. Deze maakt gebruik van een aantal functies
 in de bibliotheek `./intranet/ldap_support.inc.php`. Bestudeer deze goed om zo je eigen website goed 
 aan te sluiten op LDAP.
+
+# Gegenereerde documentatie
+In de code van het prototype is gewerkt met PHP-DOC markeringen. Op basis hiervan is documentatie gegenereerd
+met DoxyGen. 
+
+Deze documentatie is [hier](./html/index.html) te vinden.
