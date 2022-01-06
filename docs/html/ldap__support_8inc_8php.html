@@ -105,7 +105,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a454d4b8f1924c78fa24e00309244f4c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ldap__support_8inc_8php.html#a454d4b8f1924c78fa24e00309244f4c0">GetUserDNFromUID</a> ($lnk, $uid)</td></tr>
 <tr class="separator:a454d4b8f1924c78fa24e00309244f4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Lots of documented LDAP function</p>
+<dl class="section author"><dt>Author</dt><dd>Martin Molema <a href="#" onclick="location.href='mai'+'lto:'+'mar'+'ti'+'n.m'+'ol'+'ema'+'@n'+'hls'+'te'+'nde'+'n.'+'com'; return false;">marti<span style="display: none;">.nosp@m.</span>n.mo<span style="display: none;">.nosp@m.</span>lema@<span style="display: none;">.nosp@m.</span>nhls<span style="display: none;">.nosp@m.</span>tende<span style="display: none;">.nosp@m.</span>n.co<span style="display: none;">.nosp@m.</span>m</a> </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2022</dd></dl>
+<p>A number of basic functions to show students how to interact (read/modify/query) LDAP objects. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a435766bf6fef8b7da3a9297bbea8019c" name="a435766bf6fef8b7da3a9297bbea8019c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a435766bf6fef8b7da3a9297bbea8019c">&#9670;&nbsp;</a></span>AddUserToGroup()</h2>
 
@@ -168,6 +173,21 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Makes a connection to the database (using <a href="https://www.php.net/manual/en/function.ldap-connect.php">ldap_connect</a>) and binds the user and password (<a href="https://www.php.net/manual/en/function.ldap-bind.php">ldap_bind</a>). On success a resource/link is returned for further use in other functions.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="ldap__constants_8inc_8php.html">ldap_constants.inc.php</a> </dd>
+<dd>
+<a class="el" href="ldap__constants_8inc_8php.html#a79d1e0384eb0e43433133dc952986ac9">LDAP_ADMIN_CN</a> The DN of the user that will setup the connection </dd>
+<dd>
+<a class="el" href="ldap__constants_8inc_8php.html#a0da339ebb7af3dd02e7f1fda775871a4">LDAP_PASSWORD</a> </dd>
+<dd>
+<a class="el" href="ldap__constants_8inc_8php.html#a8295463781afeb291b043801382b4372">LDAP_PORT</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>resource </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -220,6 +240,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Creates a new user.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">$lnk</td><td>the connection to the LDAP server </td></tr>

@@ -1,3 +1,43 @@
+<?php
+/** @file intranet/index.php
+ * Index for the intranet. Users need to logon using BasicAuth
+ *
+ * @author Martin Molema <martin.molema@nhlstenden.com>
+ * @copyright 2022
+ *
+ * Show the user's DN and all group memberships
+ */
+
+include_once "ldap_constants.inc.php";
+include_once "ldap_support.inc.php";
+
+/**
+ * Function to show info on the logged in user
+ * @return void
+ * @throws Exception
+ */
+
+function reportUserInfo()
+{
+
+    try {
+        $lnk = ConnectAndCheckLDAP();
+    } catch (Exception $ex) {
+        die($ex->getMessage());
+    }
+
+    $userDN = GetUserDNFromUID($lnk, $_SERVER["AUTHENTICATE_UID"]);
+    echo "<P>User DN = ${userDN} </P>";
+    if ($userDN != null) {
+        $groups = GetAllLDAPGroupMemberships($lnk, $userDN);
+        echo "<P>Group memberships:</P><ul>";
+        foreach ($groups as $group) {
+            echo "<li>$group</li>";
+        }
+        echo "</ul>";
+    }
+}//reportUserInfo
+?>
 <html>
 <head>
     <title>Hello Intranet!</title>
@@ -24,30 +64,13 @@
             <P>Login gegevens:</P>
 
             <?
+
+            /**
+             * First the HTML
+             */
             echo "<P>Gebruiker '" . $_SERVER["AUTHENTICATE_UID"] . "' ingelogd met wachtwoord '" . $_SERVER['PHP_AUTH_PW'] . "'</P>";
-            ?>
 
-            <?
-            include_once "ldap_constants.inc.php";
-            include_once "ldap_support.inc.php";
 
-            try{
-                $lnk = ConnectAndCheckLDAP();
-            }
-            catch(Exception $ex){
-                die($ex->getMessage());
-            }
-
-            $userDN = GetUserDNFromUID($lnk, $_SERVER["AUTHENTICATE_UID"]);
-            echo "<P>User DN = ${userDN} </P>";
-            if ($userDN != null) {
-                $groups = GetAllLDAPGroupMemberships($lnk, $userDN);
-                echo "<P>Group memberships:</P><ul>";
-                foreach ($groups as $group) {
-                    echo "<li>$group</li>";
-                }
-                echo "</ul>";
-            }
             ?>
         </section>
         <section>

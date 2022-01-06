@@ -1,3 +1,13 @@
+<?php
+/** @file index.php
+ * Index for the public website
+ *
+ * @author Martin Molema <martin.molema@nhlstenden.com>
+ * @copyright 2022
+ *
+ * Show a very basis HTML Bootstrap template
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>

@@ -111,7 +111,12 @@ Variables</h2></td></tr>
 <tr class="memitem:a0da339ebb7af3dd02e7f1fda775871a4"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ldap__constants_8inc_8php.html#a0da339ebb7af3dd02e7f1fda775871a4">LDAP_PASSWORD</a> &quot;wachtwoord&quot;</td></tr>
 <tr class="separator:a0da339ebb7af3dd02e7f1fda775871a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Lots of constants to use in LDAP functions (</p><dl class="section see"><dt>See also</dt><dd><a class="el" href="ldap__support_8inc_8php.html">ldap_support.inc.php</a> )</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Martin Molema <a href="#" onclick="location.href='mai'+'lto:'+'mar'+'ti'+'n.m'+'ol'+'ema'+'@n'+'hls'+'te'+'nde'+'n.'+'com'; return false;">marti<span style="display: none;">.nosp@m.</span>n.mo<span style="display: none;">.nosp@m.</span>lema@<span style="display: none;">.nosp@m.</span>nhls<span style="display: none;">.nosp@m.</span>tende<span style="display: none;">.nosp@m.</span>n.co<span style="display: none;">.nosp@m.</span>m</a> </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2022</dd></dl>
+<p>These constants are tailored for the current setup in LDAP can or SHOULD be changed according to making the website work and safer. </p>
+</div><h2 class="groupheader">Variable Documentation</h2>
 <a id="a175f0c752d7a4f4afa648c895b1e1f9f" name="a175f0c752d7a4f4afa648c895b1e1f9f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a175f0c752d7a4f4afa648c895b1e1f9f">&#9670;&nbsp;</a></span>BASE_DN</h2>
 
@@ -123,6 +128,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The basis where our data is located in the Directory Information Tree (DIT) in de slapd store </p>
 
 </div>
 </div>
@@ -137,6 +143,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The LDAP attribute name that is used to store one user's DN in a GroupOfUniqueNames-object. </p>
 
 </div>
 </div>
@@ -151,6 +158,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The DN (relative to the BASE_DN) where the group for all website users is located </p>
 
 </div>
 </div>
@@ -165,6 +173,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The user that is used to connect to the LDAP-store to query and make changes. <b>Problem: this user has too many rights and cn=webuserldap,.... has not enough.</b> </p>
 
 </div>
 </div>
@@ -179,6 +188,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The IP-address of our LDAP host/server; In this case LOCALHOST is used (on the same server as this website) </p>
 
 </div>
 </div>
@@ -193,6 +203,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Plaintext password. <b>This should be prevented!</b> </p>
 
 </div>
 </div>
@@ -207,6 +218,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The port used to connect to the server (the value 389 is already the default value) </p>
 
 </div>
 </div>
@@ -221,6 +233,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The DN (relative to the BASE_DN) of the OrganisationalUnit (OU) of the application users </p>
 
 </div>
 </div>
@@ -235,6 +248,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The DN (relative to the BASE_DN) of the OrganisationalUnit (OU) of the external users </p>
 
 </div>
 </div>
@@ -249,6 +263,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The DN (relative to the BASE_DN) of the OrganisationalUnit (OU) of the internal users </p>
 
 </div>
 </div>

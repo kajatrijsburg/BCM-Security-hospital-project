@@ -1,6 +1,25 @@
 <?php
+/** @file ldap_support.inc.php
+ * Lots of documented LDAP function
+ *
+ * @author Martin Molema <martin.molema@nhlstenden.com>
+ * @copyright 2022
+ *
+ * A number of basic functions to show students how to interact (read/modify/query) LDAP objects.
+ */
 
-
+/**
+ * Makes a connection to the database (using  <a href="https://www.php.net/manual/en/function.ldap-connect.php">ldap_connect</a>)
+ * and binds the user and password (<a href="https://www.php.net/manual/en/function.ldap-bind.php">ldap_bind</a>).
+ * On success a resource/link is returned for further use in other functions.
+ *
+ * @see ldap_constants.inc.php
+ * @see LDAP_ADMIN_CN   The DN of the user that will setup the connection
+ * @see LDAP_PASSWORD
+ * @see LDAP_PORT
+ * @return resource
+ * @throws Exception
+ */
 function ConnectAndCheckLDAP() {
 
 // connect to the service
@@ -41,6 +60,7 @@ function AddUserToGroup($lnk, $groupDN, $userDN)
 }
 
 /**
+ * Creates a new user.
  *
  * @param $lnk the connection to the LDAP server
  * @param $newUserDN the complete Distinguished name (DN) of the user to be created

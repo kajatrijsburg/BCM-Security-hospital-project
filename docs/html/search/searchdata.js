@@ -3,7 +3,7 @@ var indexSectionsWithContent =
   0: "$abcfgilrstu",
   1: "cfilr",
   2: "acgrs",
-  3: "$bcgiltu",
+  3: "$bcgltu",
   4: "s"
 };
 

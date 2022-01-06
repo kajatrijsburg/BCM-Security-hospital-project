@@ -31,7 +31,8 @@ var NAVTREE =
       [ "Voorbeelden", "md_docs_README.html#autotoc_md3", [
         [ "Database gebruik", "md_docs_README.html#autotoc_md4", null ],
         [ "Interfacing met LDAP", "md_docs_README.html#autotoc_md5", null ]
-      ] ]
+      ] ],
+      [ "Gegenereerde documentatie", "md_docs_README.html#autotoc_md6", null ]
     ] ],
     [ "Security & BCM Prototype website", "md_README.html", null ],
     [ "Files", "files.html", [

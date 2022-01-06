@@ -1,3 +1,13 @@
+<?php
+/** @file createNewUser.php
+ * PHP script to create a new user. (@see ldap_support.inc.php and @CreateNewUser )
+ *
+ * @author Martin Molema <martin.molema@nhlstenden.com>
+ * @copyright 2022
+ *
+ * This script uses a number of basic LDAP-functions that students can use to learn or adapt
+ */
+?>
 <html>
 <head>
     <title>New User Creation</title>

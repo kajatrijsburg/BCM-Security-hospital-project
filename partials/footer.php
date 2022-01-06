@@ -1,8 +1,17 @@
 <?php
+/** @file footer.php
+ * The PHP script to use as a footer showing information from the database
+ *
+ * @author Martin Molema <martin.molema@nhlstenden.com>
+ * @copyright 2022
+ *
+ * This is the very basic way of interacting with a MySQL database. Lots of stuff to be improved for security!
+ */
+
   // FIXME: remove plaintext passwords & databasename
-  $user = 'website';
-  $pass = 'wachtwoord';
-  $connection = new PDO('mysql:host=localhost;dbname=nrg', $user, $pass);
+  $user = 'website';       ///< the username to connect to the database
+  $pass = 'wachtwoord';    ///< the password to connect to the database
+  $connection = new PDO('mysql:host=localhost;dbname=nrg', $user, $pass); ///< make the connection
 
   $SQL = 'SELECT version FROM tbl_configuration;';
 

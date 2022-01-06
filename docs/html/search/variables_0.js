@@ -11,7 +11,6 @@ var searchData=
   ['_24sql_8',['$SQL',['../footer_8php.html#af257545da465befb663591fd6fbe85ce',1,'footer.php']]],
   ['_24statement_9',['$statement',['../footer_8php.html#a776dc234d8e2b257550d9444ddf5d399',1,'footer.php']]],
   ['_24user_10',['$user',['../footer_8php.html#a598ca4e71b15a1313ec95f0df1027ca5',1,'footer.php']]],
-  ['_24userdn_11',['$userDN',['../intranet_2index_8php.html#a0bcbd7ac0d004188c06652c44141c405',1,'index.php']]],
-  ['_24username_12',['$username',['../createNewUser_8php.html#a7700b9aaa239720d7bd788d5b963014f',1,'createNewUser.php']]],
-  ['_24version_13',['$version',['../footer_8php.html#a17c8948c68aa44fa9961ae169b6a8961',1,'footer.php']]]
+  ['_24username_11',['$username',['../createNewUser_8php.html#a7700b9aaa239720d7bd788d5b963014f',1,'createNewUser.php']]],
+  ['_24version_12',['$version',['../footer_8php.html#a17c8948c68aa44fa9961ae169b6a8961',1,'footer.php']]]
 ];
