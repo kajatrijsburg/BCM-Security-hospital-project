@@ -1,5 +1,28 @@
 <?php
 
+
+function ConnectAndCheckLDAP() {
+
+// connect to the service
+    $lnk = ldap_connect(LDAP_HOST, LDAP_PORT);
+
+// check connectivity
+    if ($lnk === false) {
+        throw(new Exception("Cannot connect to " . LDAP_HOST . ":" . LDAP_PORT));
+    } else {
+        // expect protocol version 3 to be the standard
+        ldap_set_option($lnk, LDAP_OPT_PROTOCOL_VERSION, 3);
+
+        // bind to the service using a username & password
+        $bindres = ldap_bind($lnk, LDAP_ADMIN_CN, LDAP_PASSWORD);
+        if ($bindres === false) {
+            throw(new Exception("Cannot bind using user " . LDAP_ADMIN_CN));
+        }
+    }
+
+    return $lnk;
+}
+
 /**
  * Adds a user to an existing groupOfUniqueNames
  * @param $lnk connection to the LDAP server
@@ -96,8 +119,7 @@ function SetPassword($lnk, $newUserDN, $newPassword)
  */
 function ReportUser($lnk, $userDN)
 {
-
-    // now get the object from the database and check the values.
+    // get the object from the database and check the values.
     $ldapRes = ldap_read($lnk, $userDN, "(ObjectClass=*)", array("*"));
 
     if ($ldapRes !== false) {
@@ -147,9 +169,67 @@ function ReportUser($lnk, $userDN)
     }
 }// ReportUser
 
+/**
+ * Gets all the groups in LDAP that has the given user's DN (DistinguishedName) as a UniqueMember. So this function
+ * will get all the groups that the user is a memberOf.
+ * @param $lnk
+ * @param $userDN
+ * @return array
+ * @throws Exception
+ */
 function GetAllLDAPGroupMemberships($lnk, $userDN) {
-    // ldap://energy.org:389/ou=Intern,o=Energy,dc=energy,dc=org?*?sub?(&(objectClass=*)(uniqueMember=cn=martin,ou=Intern,o=Energy,dc=energy,dc=org))
+    // https://www.php.net/manual/en/function.ldap-search.php
 
-    $results = ldap_search($lnk, 'o=Energy,dc=energy,dc=org', "(&(objectClass=*)(uniqueMember=${userDN})", '*', 0, -1,-1,0);
+    /**
+     * Perform search in the BASE_DN from the LDAP-constants (@see ldap_constants.inc.php)
+     */
+    $ldapRes = ldap_search($lnk, BASE_DN, "(&(objectClass=*)(uniqueMember=${userDN}))", ['*'], 0, -1,-1,0);
+    if ($ldapRes ===  false ) {
+        throw new Exception("GetAllLDAPGroupMemberships::Cannot execute query");
+    }
+    // now actually read the found entries
+    $results = ldap_get_entries($lnk, $ldapRes);
+    $groups = [];
 
-}
+    // cycle through the results. first check if there are results
+    if ($results !== false && $results['count'] > 0) {
+        $count = $results['count'];
+        for ($i = 0; $i < $count ;$i++){
+            // get one record from the result
+            $record = $results[$i];
+
+            // get the 'DN' and add it to the array of groups ($groups[] = ... will add a new value)
+            $groups[] = $record['dn'];
+        }
+    }
+    return $groups;
+}//GetAllLDAPGroupMemberships
+
+/**
+ * Lookup the logged in user (by using the specified UID) in LDAP and return its DistinguishedName (DN)
+ * @param $lnk the active link (connected & bound)
+ * @param $uid the UserID to lookup
+ * @return mixed|null will return a string (DN) or null if not found
+ * @throws Exception If search raises an error an exception is thrown.
+ */
+function GetUserDNFromUID($lnk, $uid) {
+    // https://www.php.net/manual/en/function.ldap-search.php
+    $ldapRes = ldap_search($lnk, BASE_DN, "(&(objectClass=INetOrgPerson)(uid=${uid}))", ['*'], 0, -1,-1,0);
+    if ($ldapRes ===  false ) {
+        throw new Exception("GetUserDNFromUID::Cannot execute query");
+    }
+
+    $results = ldap_get_entries($lnk, $ldapRes);
+    if ($results !== false && $results['count'] == 1) {
+        $record = $results[0];
+        if (isset($record['dn'])) {
+            return $record['dn'];
+        }
+        else {
+            return null;
+        }
+    }
+    else {
+        return null;
+    }
+}// GetUserDNFromUID
