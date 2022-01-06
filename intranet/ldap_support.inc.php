@@ -146,3 +146,10 @@ function ReportUser($lnk, $userDN)
         }
     }
 }// ReportUser
+
+function GetAllLDAPGroupMemberships($lnk, $userDN) {
+    // ldap://energy.org:389/ou=Intern,o=Energy,dc=energy,dc=org?*?sub?(&(objectClass=*)(uniqueMember=cn=martin,ou=Intern,o=Energy,dc=energy,dc=org))
+
+    $results = ldap_search($lnk, 'o=Energy,dc=energy,dc=org', "(&(objectClass=*)(uniqueMember=${userDN})", '*', 0, -1,-1,0);
+
+}
