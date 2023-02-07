@@ -1,3 +1,7 @@
+create database nrg;
+
+use nrg;
+
 DROP TABLE IF EXISTS tbl_configuration;
 
 CREATE TABLE tbl_configuration
