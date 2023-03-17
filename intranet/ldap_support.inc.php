@@ -8,6 +8,8 @@
  * A number of basic functions to show students how to interact (read/modify/query) LDAP objects.
  */
 
+require 'ldap_constants.inc.php';
+
 /**
  * Makes a connection to the database (using  <a href="https://www.php.net/manual/en/function.ldap-connect.php">ldap_connect</a>)
  * and binds the user and password (<a href="https://www.php.net/manual/en/function.ldap-bind.php">ldap_bind</a>).
