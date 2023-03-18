@@ -62,6 +62,18 @@ function AddUserToGroup($lnk, $groupDN, $userDN)
 }
 
 /**
+ * @throws Exception
+ */
+function RemoveUserFromGroup($lnk, $groupDN, $userDN) {
+    $attributes = [GROUP_ATTR_NAME => $userDN];
+    if (ldap_mod_del($lnk, $groupDN, $attributes) === false) {
+        $error = ldap_error($lnk);
+        $errno = ldap_errno($lnk);
+        throw new Exception($error, $errno);
+    }
+}
+
+/**
  * Creates a new user.
  *
  * @param $lnk the connection to the LDAP server
@@ -180,9 +192,10 @@ function ReportUser($lnk, $userDN)
             }//for each attribute
 
             // Now show all the values
-            foreach ($valuesNamed as $key => $value) {
-                echo "{$key} = $value \n";
-            }//for each value
+            //foreach ($valuesNamed as $key => $value) {
+            //    echo "{$key} = $value \n";
+            //}//for each value
+            return $valuesNamed;
 
         }// if exactly one item found (this must be!)
         else {
