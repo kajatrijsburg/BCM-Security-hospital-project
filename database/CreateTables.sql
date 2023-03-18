@@ -46,7 +46,7 @@ CREATE TABLE medischegegevens
 CREATE TABLE voedingsplan
 (
     voedingsplanid int  NOT NULL AUTO_INCREMENT,
-    descriptie     text NOT NULL,
+    beschrijving     text NOT NULL,
     userid         int  NOT NULL,
     PRIMARY KEY (voedingsplanid),
     FOREIGN KEY (userid) REFERENCES user (userid)
@@ -55,7 +55,7 @@ CREATE TABLE voedingsplan
 CREATE TABLE behandelplan
 (
     behandelplanid int NOT NULL AUTO_INCREMENT,
-    descriptie text NOT NULL,
+    beschrijving text NOT NULL,
     userid int     NOT NULL,
     PRIMARY KEY (behandelplanid),
     FOREIGN KEY (userid) REFERENCES user (userid)
