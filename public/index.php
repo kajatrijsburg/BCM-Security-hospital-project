@@ -53,7 +53,10 @@
                     <p class="lead">
                         log in om verder te gaan naar het intranet
                     </p>
-                    <button type="button" class="btn btn-primary btn-lg">Log In</button>
+                    <a href="LogIn.php">
+                        <button type="button" class="btn btn-primary btn-lg">Log In</button>
+                    </a>
+
                 </figure>
             </div>
         </div>
