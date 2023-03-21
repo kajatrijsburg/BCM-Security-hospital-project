@@ -13,7 +13,7 @@
     />
    
     
-    <title>Frontend Bootcamp</title>
+    <title>ESALA</title>
   </head>
   <body>
     <header>
@@ -70,18 +70,18 @@
                                     <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Behandelplan</span> </a>
                                 
                             </li>
-                            <li class="nav-item">
+                            <li>
                                 <a href="Afspraken.php" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Afspraken</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a href="Medicijnen.php" class="nav-link px-0 align-middle ">
+                            <li>
+                                <a href="#" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Medicijnen</span></a>
                                 <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                    <li class="w-100 nav-item">
+                                    <li class="w-100">
                                         <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li>
                                         <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
                                     </li>
                                 </ul>
@@ -105,88 +105,36 @@
                         </div>
                     </div>
                 </div>
-                <!-- afhankelijk van permisies als patiënt zal dit worden aangegeven -->
-                <div class="card border-dark w-100 h-100">
-                    <div>
-                        <table>
-                            <tr>
-                                <th>Geplande Behandelingen</th>
-                            </tr>
+                <div class="col py-3">
+                    <form action="Medicijnen.php" method="post">
+                        Naam medicijn: <input type="text">
+                        <input type="submit">
+                        <input type="submit" value="relevant voor behandelingen">
+                        <!-- onderste form is voor specialist wanneer deze klikt op relevant voor behandeling-->
+                        <form action="Medicijnen.php" method="post">
+                            PatiëntID: <input type="text">
+                            <input type="button" value="Search">
+                        </form>
+                    </form>
+                    <table>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Beschrijving</th>
+                            <th>Dagelijkse Dosis</th>
+                        </tr>
+                        <tr>
                             <?php
-                            //foreach (ModelItem in databaseModel)
-                            {
-                                //<tr>
-                                //<td></td>  beschrijving van behandeling
-                                //<td></td>  radio type input voor weigering (kan de maatregelen genomen niet volgen)
-                                //<td></td>  radio type input voor acceptatie (kan doorgaan met de geplande afspraken)
-                                //</tr>
-                            }
+                            //foreach ()
+                            //{
+                            //    <td></td> hier komt de naam van het medicijn
+                            //    <td></td> hier komt de beschrijving geassocieerd met het medicijn
+                            //    <td></td> de dagelijkse dosis van de medicatie
+                            //}
                             ?>
-                        </table>
-                        <!-- het form hieronder is voor wanneer een specifieke bhenadeling wordt geanuleerd door de patiënt -->
-                        <form action="index.php" method="post">
-                            <label>Redenering voor annuleren:</label>
-                            <input type="text">
-                        </form>
-                    </div>
-                    <div>
-                        <label>Uw medische data</label>
-                        <div>
-                            <label>Gewicht:</label>
-                            <label>###</label>
-                            <label>Bloeddruk:</label>
-                            <label>###</label>
-                            <label>Hartslagrust:</label>
-                            <label>###</label>
-                        </div>
-                    </div>
-
-                    <!-- deze moet voor patiënten hidden zijn maar voor experts die behandelen zichtbaar zijn -->
-                    <div>
-                        <form action="index.php" method="post">
-                            <label>Patiënt browser</label>
-                            PatiëntId: <input type="text">
-                        </form>
-                        <table>
-                            <tr>
-                                <th>Geplande Behandelingen</th>
-                            </tr>
-                            <tr>
-                                <th>Handelingen voor patiënt:</th>
-                                <?php
-                                //foreach ()
-                                {
-                                    //<tr>
-                                    //<td></td> de handelingen als beschreven voor de patiënt voor weergave van de experts
-                                    //<td><input type="button">✖</td>
-                                    //<tr>
-                                }
-                                ?>
-                            </tr>
-                        </table>
-                        <!--redenering naar de patiënt toe voor annuleren specifieke behandeling
-                            deze is hidden zolang er geen row geselecteerd wordt voor annulering-->
-                        <form action="index.php" method="post">
-                            <label>Bericht naar patiënt over annuleren</label>
-                            <input type="text">
-                        </form>
-                    </div>
-                    <div>
-                        <label>Patiënt Data</label>
-                        <div>
-                            <label>Opname: </label> <!-- datum medische gegevens-->
-                        </div>
-                        <div>
-                            <label>Gewicht:</label>
-                            <label>###</label> <!-- DB data voor gewicht uit patiënt browser -->
-                            <label>Bloeddruk:</label>
-                            <label>###</label> <!-- DB data voor bloedruk patiënt uit patiënt browser-->
-                            <label>Hartslagrust:</label>
-                            <label>###</label> <!-- DB data voor hartslagrust patiënt uit patiënt browser -->
-                        </div>
-                    </div>
+                        </tr>
+                    </table>
                 </div>
-                </div>
+            </div>
         </div>
         <!-- Sidebar -->
      
