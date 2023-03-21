@@ -7,7 +7,6 @@
     
     <link href="css/main.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-      <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
@@ -107,7 +106,61 @@
                     </div>
                 </div>
                 <div class="col py-3">
-
+                    <!-- content voor patiënt rol-->
+                    <table>
+                        <tr>
+                            <th>Datum</th>
+                            <th>Tijd</th>
+                            <th>Locatie</th>
+                            <th>Digitaal gesprek</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            //foreach ()
+                            {
+                                //<td></td> de datum waarop het gesprek gehouden wordt
+                                //<td></td> de tijd van het gesprek op de aangegeven datum
+                                //<td></td> de locatie waar het gesprek is (mocht het niet digitaal zijn)
+                                //<td></td> is er spraken van een digitaal gesprek
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                    <!-- content voor specialist rol-->
+                    <form action="Afspraken.php" method="post">
+                        <label>Patiënt browser</label>
+                        <input type="text">
+                        <input type="button" value="search">
+                    </form>
+                    <input type="button" value="maak afspraak aan">
+                    <form>
+                        Voor patiënt: <input type="text">
+                        Gepland op: <input type="date">
+                        Geplande tijd: <input type="time">
+                        Locatie: <input type="text">
+                        Digitaal?: <input type="radio">
+                    </form>
+                    <table>
+                        <tr>
+                            <th>Patiënt</th>
+                            <th>Datum</th>
+                            <th>Tijd</th>
+                            <th>Locatie</th>
+                            <th>Digitaal gesprek</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            //foreach ()
+                            {
+                                //<td></td> het id van de patiënt
+                                //<td></td> de datum waarop het gesprek gehouden wordt
+                                //<td></td> de tijd van het gesprek op de aangegeven datum
+                                //<td></td> de locatie waar het gesprek is (mocht het niet digitaal zijn)
+                                //<td></td> is er spraken van een digitaal gesprek
+                            }
+                            ?>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -123,9 +176,12 @@
         </div>
       </main>
 
-    <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
-
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    
 
   </body>
 </html>

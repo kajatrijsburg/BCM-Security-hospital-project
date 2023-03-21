@@ -7,7 +7,6 @@
     
     <link href="css/main.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-      <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
@@ -106,106 +105,97 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD:index.php
-                <!-- afhankelijk van permisies als patiënt zal dit worden aangegeven -->
-                <div class="card border-dark w-100 h-100">
-                    <div>
-                        <table>
-                            <tr>
-                                <th>Geplande Behandelingen</th>
-                            </tr>
-                            <?php
-                            //foreach (ModelItem in databaseModel)
-                            {
-                                //<tr>
-                                //<td></td>  beschrijving van behandeling
-                                //<td></td>  radio type input voor weigering (kan de maatregelen genomen niet volgen)
-                                //<td></td>  radio type input voor acceptatie (kan doorgaan met de geplande afspraken)
-                                //</tr>
-                            }
-                            ?>
-                        </table>
-                        <!-- het form hieronder is voor wanneer een specifieke bhenadeling wordt geanuleerd door de patiënt -->
-                        <form action="index.php" method="post">
-                            <label>Redenering voor annuleren:</label>
-                            <input type="text">
-                        </form>
-                    </div>
-                    <div>
-                        <label>Uw medische data</label>
-                        <div>
-                            <label>Gewicht:</label>
-                            <label>###</label>
-                            <label>Bloeddruk:</label>
-                            <label>###</label>
-                            <label>Hartslagrust:</label>
-                            <label>###</label>
-                        </div>
-                    </div>
-
-                    <!-- deze moet voor patiënten hidden zijn maar voor experts die behandelen zichtbaar zijn -->
-                    <div>
-                        <form action="index.php" method="post">
-                            <label>Patiënt browser</label>
-                            PatiëntId: <input type="text">
-                        </form>
-                        <table>
-                            <tr>
-                                <th>Geplande Behandelingen</th>
-                            </tr>
-                            <tr>
-                                <th>Handelingen voor patiënt:</th>
-                                <?php
-                                //foreach ()
-                                {
-                                    //<tr>
-                                    //<td></td> de handelingen als beschreven voor de patiënt voor weergave van de experts
-                                    //<td><input type="button">✖</td>
-                                    //<tr>
-                                }
-                                ?>
-                            </tr>
-                        </table>
-                        <!--redenering naar de patiënt toe voor annuleren specifieke behandeling
-                            deze is hidden zolang er geen row geselecteerd wordt voor annulering-->
-                        <form action="index.php" method="post">
-                            <label>Bericht naar patiënt over annuleren</label>
-                            <input type="text">
-                        </form>
-                    </div>
-                    <div>
-                        <label>Patiënt Data</label>
-                        <div>
-                            <label>Opname: </label> <!-- datum medische gegevens-->
-                        </div>
-                        <div>
-                            <label>Gewicht:</label>
-                            <label>###</label> <!-- DB data voor gewicht uit patiënt browser -->
-                            <label>Bloeddruk:</label>
-                            <label>###</label> <!-- DB data voor bloedruk patiënt uit patiënt browser-->
-                            <label>Hartslagrust:</label>
-                            <label>###</label> <!-- DB data voor hartslagrust patiënt uit patiënt browser -->
-                        </div>
-                    </div>
-                </div>
-=======
                 <div class="col py-3">
                     <!--Behandelplan -->
                     <table>
                         <tr>
-
+                            <th>Beschrijving</th>
+                            <th>behandelingsperiode</th>
                         </tr>
-                        <?php
-
-                        ?>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <?php
+                            //foreach ()
+                            {
+                                //<td></td> geeft patiënt aan (enkel voor de specialisten die de optie hebben te zoeken)
+                                //<td></td> beschrijving van het behandelplan
+                                //<td></td> de aanmaak en einddatum van het behandelplan
+                            }
+                            ?>
                         </tr>
                     </table>
                     <!--Voedselplan -->
->>>>>>> master:public/Behandelplan.php
+                    <table>
+                        <tr>
+                            <th>Beschrijving</th>
+                            <th>Voedselplan periode</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            //foreach ()
+                            {
+                                //<td></td> geeft patiënt aan (enkel voor de specialisten die de optie hebben te zoeken)
+                                //<td></td> beschrijving van het voedselplan
+                                //<td></td> de aanmaak en einddatum van het voedselplan
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                    <!--Behandelplan specialist (hidden voor patiënt)-->
+                    <form>
+                        <label>Patiënt browser</label>
+                        PatiëntID: <input type="text">
+                    </form>
+                    <table>
+                        <tr>
+                            <th>PatiëntID</th>
+                            <th>Beschrijving</th>
+                            <th>behandelingsperiode</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            //foreach ()
+                            {
+                                //<td></td> geeft patiënt aan (enkel voor de specialisten die de optie hebben te zoeken)
+                                //<td></td> beschrijving van het behandelplan
+                                //<td></td> de aanmaak en einddatum van het behandelplan
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                    <input type="button" value="Voeg nieuw behandelplan toe">
+                    <form>
+                        Voor patiënt: <input type="text">
+                        Beschrijving behandeling: <input type="text">
+                        beginperiode: <input type="date"> (default = aanmaakdatum)
+                        eindperiode:  <input type="date">
+                    </form>
+                    <!--Voedselplan specialist (hidden voor patiënt)-->
+                    <table>
+                        <tr>
+                            <th>PatiëntID</th>
+                            <th>Beschrijving</th>
+                            <th>Voedselplan periode</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            //foreach ()
+                            {
+                                //<td></td> geeft patiënt aan (enkel voor de specialisten die de optie hebben te zoeken)
+                                //<td></td> beschrijving van het voedselplan
+                                //<td></td> de aanmaak en einddatum van het voedselplan
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                    <input type="button" value="Voeg nieuw voedselplan toe">
+                    <form>
+                        Voor patiënt: <input type="text">
+                        Beschrijving voedselplan: <input type="text">
+                        beginperiode: <input type="date"> (default = aanmaakdatum)
+                        eindperiode:  <input type="date">
+                    </form>
                 </div>
+            </div>
         </div>
         <!-- Sidebar -->
      
@@ -219,7 +209,11 @@
         </div>
       </main>
 
-    <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
     
 
   </body>

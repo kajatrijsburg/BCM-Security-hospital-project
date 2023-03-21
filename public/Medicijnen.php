@@ -7,7 +7,6 @@
     
     <link href="css/main.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-      <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
@@ -110,9 +109,29 @@
                     <form action="Medicijnen.php" method="post">
                         Naam medicijn: <input type="text">
                         <input type="submit">
+                        <input type="submit" value="relevant voor behandelingen">
+                        <!-- onderste form is voor specialist wanneer deze klikt op relevant voor behandeling-->
+                        <form action="Medicijnen.php" method="post">
+                            PatiëntID: <input type="text">
+                            <input type="button" value="Search">
+                        </form>
                     </form>
                     <table>
-
+                        <tr>
+                            <th>Naam</th>
+                            <th>Beschrijving</th>
+                            <th>Dagelijkse Dosis</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            //foreach ()
+                            //{
+                            //    <td></td> hier komt de naam van het medicijn
+                            //    <td></td> hier komt de beschrijving geassocieerd met het medicijn
+                            //    <td></td> de dagelijkse dosis van de medicatie
+                            //}
+                            ?>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -129,7 +148,11 @@
         </div>
       </main>
 
-    <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
     
 
   </body>
