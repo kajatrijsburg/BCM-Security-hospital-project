@@ -1,6 +1,6 @@
 <?php
 /** @file intranet/index.php
- * Index for the intranet. Users need to logon using BasicAuth
+ * Index for the intranet. Users need to login using BasicAuth
  *
  * @author Martin Molema <martin.molema@nhlstenden.com>
  * @copyright 2022
@@ -68,9 +68,24 @@ function reportUserInfo()
             /**
              * First the HTML
              */
+
+
+            // session time check
+
+            if(!isset($_SESSION["TIMEOUT"])){
+                echo "you need to login or reenter credentials";
+            }
+            if(isset($_SESSION["TIMEOUT"])){
+                if(time() >= $_SESSION["TIMEOUT"]){
+                    echo "navigate to energy.org/intranet/session.php to refresh session";
+                    session_destroy();
+                }
+            }
+
+
             echo "<P>Gebruiker '" . $_SERVER["AUTHENTICATE_UID"] . "' ingelogd met wachtwoord '" . $_SERVER['PHP_AUTH_PW'] . "'</P>";
-
-
+            echo $_SESSION["TIMEOUT"] . " ";
+            echo time();
             ?>
         </section>
         <section>
