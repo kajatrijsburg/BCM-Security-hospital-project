@@ -111,6 +111,25 @@ function CreateNewUser($lnk, $newUserDN, $cn, $sn, $uid, $givenName)
     }
 }// CreateNewUser
 
+function CreateNewRole($lnk, $newRoleDN, $cn) {
+    // setup an array with all the attributes needed to add a new role.
+    $fields = array();
+
+    // first indicate what kind of object we want te create ("Objectclass"). Multivalue attribute!!
+    $fields['objectClass'][] = "top";
+    $fields['objectClass'][] = "groupOfUniqueNames";
+
+    $fields['cn'] = $cn;
+    $fields['uniqueMember'][] = "";
+
+    // Now do the actual adding of the object to the LDAP-service
+    if (ldap_add($lnk, $newRoleDN, $fields) === false) {
+        $error = ldap_error($lnk);
+        $errno = ldap_errno($lnk);
+        throw new Exception($error, $errno);
+    }
+}
+
 /**
  * Changes or adds a new password for an existing user. Requires the Crypt-SHA-256 to be available as a hashing function
  * @param $lnk the connection to the LDAP server
@@ -239,6 +258,34 @@ function GetAllLDAPGroupMemberships($lnk, $userDN) {
     }
     return $groups;
 }//GetAllLDAPGroupMemberships
+
+function GetAllLDAPGroups($lnk) {
+    // https://www.php.net/manual/en/function.ldap-search.php
+
+    /**
+     * Perform search in the BASE_DN from the LDAP-constants (@see ldap_constants.inc.php)
+     */
+    $ldapRes = ldap_search($lnk, BASE_DN, "(&(objectClass=groupOfUniqueNames))", ['*'], 0, -1,-1,0);
+    if ($ldapRes ===  false ) {
+        throw new Exception("GetAllLDAPGroups::Cannot execute query");
+    }
+    // now actually read the found entries
+    $results = ldap_get_entries($lnk, $ldapRes);
+    $groups = [];
+
+    // cycle through the results. first check if there are results
+    if ($results !== false && $results['count'] > 0) {
+        $count = $results['count'];
+        for ($i = 0; $i < $count ;$i++){
+            // get one record from the result
+            $record = $results[$i];
+
+            // get the 'DN' and add it to the array of groups ($groups[] = ... will add a new value)
+            $groups[] = $record['dn'];
+        }
+    }
+    return $groups;
+}
 
 /**
  * Lookup the logged in user (by using the specified UID) in LDAP and return its DistinguishedName (DN)

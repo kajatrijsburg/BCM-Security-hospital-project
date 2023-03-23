@@ -1,6 +1,6 @@
 <?php
-require_once 'intranet/ldap_support.inc.php';
-require_once 'intranet/ldap_constants.inc.php';
+require_once 'public/intranet/ldap_support.inc.php';
+require_once 'public/intranet/ldap_constants.inc.php';
 class User {
     public $firstName;
     public $lastName;
@@ -33,6 +33,10 @@ class User {
 
     public static function createExternal($firstName, $lastname, $username, $password) {
         return self::create($firstName, $lastname, $username, $password, USERS_EXTERN_DN);
+    }
+
+    public static function createApplication($firstName, $lastname, $username, $password) {
+        return self::create($firstName, $lastname, $username, $password, USERS_APPLICATION_DN);
     }
 
     /**
