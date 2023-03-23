@@ -12,6 +12,7 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
     <title>Isla sign Up</title>
+
 </head>
 <body>
 <header>
@@ -46,26 +47,29 @@
 <div class="container">
     <div class="row align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <form class="border m-3 p-5" method="post" action="<?php echo htmlspecialchars($_SERVER[PHP_SELF]);?>">
+            <form class="border m-3 p-5" method="post" action="php/process-signup.php">
                 <h1 class="text-center m-3">Account Aanmaken</h1>
                 <div class="input-group m-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Voornaam</span>
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" name="firstName">
                     <span class="input-group-text" id="inputGroup-sizing-default">Achternaam</span>
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" name="lastName">
                 </div>
                 <div class="input-group m-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Email Adres</span>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
                 </div>
                 <div class="input-group m-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Wachtwoord</span>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" name="password1">
                 </div>
                 <div class="input-group m-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Herhaal Wachtwoord</span>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" name="password2">
                 </div>
+
+                <p id="form-feedback"></p>
+
                 <button type="submit" class="btn btn-lg btn-success m-3">Maak mijn account</button>
                 <div class="container mt-2">
                     <a href="index.php" class="btn btn-sm btn-primary">Log in</a>
@@ -75,7 +79,6 @@
             </form>
         </div>
     </div>
-
 </div>
 
 
