@@ -64,3 +64,6 @@ $count = $statement->rowCount();
 if($count > 0){
     die("Dit email adres is al in gebruik");
 }
+
+$pdo = null;
+$statement = null;
