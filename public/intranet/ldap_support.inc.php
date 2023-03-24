@@ -315,3 +315,25 @@ function GetUserDNFromUID($lnk, $uid) {
         return null;
     }
 }// GetUserDNFromUID
+
+function GetRoleDNFromCN($lnk, $cn) {
+    // https://www.php.net/manual/en/function.ldap-search.php
+    $ldapRes = ldap_search($lnk, BASE_DN, "(&(objectClass=groupOfUniqueNames)(cn=${cn}))", ['*'], 0, -1,-1,0);
+    if ($ldapRes ===  false ) {
+        throw new Exception("GetRoleDNFromCN::Cannot execute query");
+    }
+
+    $results = ldap_get_entries($lnk, $ldapRes);
+    if ($results !== false && $results['count'] == 1) {
+        $record = $results[0];
+        if (isset($record['dn'])) {
+            return $record['dn'];
+        }
+        else {
+            return null;
+        }
+    }
+    else {
+        return null;
+    }
+}// GetRoleDNFromCN

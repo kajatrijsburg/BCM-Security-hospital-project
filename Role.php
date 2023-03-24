@@ -44,12 +44,21 @@ Class Role {
         $dn = "cn=" . $cn . "," . $dn;
         $ldap = ConnectAndCheckLDAP();
         CreateNewRole($ldap, $dn, $cn);
-        //CreateNewUser($ldap, $dn, $cn, $lastname, $username, $firstName);
-        //$instance = new User($username);
-        //$instance->setPassword($password);
-        //$instance->addRole(GROUPS_DN);
         ldap_close($ldap);
-        //return $instance;
+        return new Role($dn);
+    }
+
+    /**
+     * @throws Exception
+     */
+    static function byName($cn) {
+        $ldap = ConnectAndCheckLDAP();
+        $dn = GetRoleDNFromCN($ldap, $cn);
+        ldap_close($ldap);
+        if ($dn == null) {
+            return null;
+        }
+        return new Role($dn);
     }
 }
 ?>
