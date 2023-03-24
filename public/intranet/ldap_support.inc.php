@@ -8,6 +8,8 @@
  * A number of basic functions to show students how to interact (read/modify/query) LDAP objects.
  */
 
+require 'ldap_constants.inc.php';
+
 /**
  * Makes a connection to the database (using  <a href="https://www.php.net/manual/en/function.ldap-connect.php">ldap_connect</a>)
  * and binds the user and password (<a href="https://www.php.net/manual/en/function.ldap-bind.php">ldap_bind</a>).
@@ -60,6 +62,18 @@ function AddUserToGroup($lnk, $groupDN, $userDN)
 }
 
 /**
+ * @throws Exception
+ */
+function RemoveUserFromGroup($lnk, $groupDN, $userDN) {
+    $attributes = [GROUP_ATTR_NAME => $userDN];
+    if (ldap_mod_del($lnk, $groupDN, $attributes) === false) {
+        $error = ldap_error($lnk);
+        $errno = ldap_errno($lnk);
+        throw new Exception($error, $errno);
+    }
+}
+
+/**
  * Creates a new user.
  *
  * @param $lnk the connection to the LDAP server
@@ -96,6 +110,25 @@ function CreateNewUser($lnk, $newUserDN, $cn, $sn, $uid, $givenName)
         throw new Exception($error, $errno);
     }
 }// CreateNewUser
+
+function CreateNewRole($lnk, $newRoleDN, $cn) {
+    // setup an array with all the attributes needed to add a new role.
+    $fields = array();
+
+    // first indicate what kind of object we want te create ("Objectclass"). Multivalue attribute!!
+    $fields['objectClass'][] = "top";
+    $fields['objectClass'][] = "groupOfUniqueNames";
+
+    $fields['cn'] = $cn;
+    $fields['uniqueMember'][] = "";
+
+    // Now do the actual adding of the object to the LDAP-service
+    if (ldap_add($lnk, $newRoleDN, $fields) === false) {
+        $error = ldap_error($lnk);
+        $errno = ldap_errno($lnk);
+        throw new Exception($error, $errno);
+    }
+}
 
 /**
  * Changes or adds a new password for an existing user. Requires the Crypt-SHA-256 to be available as a hashing function
@@ -178,9 +211,10 @@ function ReportUser($lnk, $userDN)
             }//for each attribute
 
             // Now show all the values
-            foreach ($valuesNamed as $key => $value) {
-                echo "{$key} = $value \n";
-            }//for each value
+            //foreach ($valuesNamed as $key => $value) {
+            //    echo "{$key} = $value \n";
+            //}//for each value
+            return $valuesNamed;
 
         }// if exactly one item found (this must be!)
         else {
@@ -225,6 +259,34 @@ function GetAllLDAPGroupMemberships($lnk, $userDN) {
     return $groups;
 }//GetAllLDAPGroupMemberships
 
+function GetAllLDAPGroups($lnk) {
+    // https://www.php.net/manual/en/function.ldap-search.php
+
+    /**
+     * Perform search in the BASE_DN from the LDAP-constants (@see ldap_constants.inc.php)
+     */
+    $ldapRes = ldap_search($lnk, BASE_DN, "(&(objectClass=groupOfUniqueNames))", ['*'], 0, -1,-1,0);
+    if ($ldapRes ===  false ) {
+        throw new Exception("GetAllLDAPGroups::Cannot execute query");
+    }
+    // now actually read the found entries
+    $results = ldap_get_entries($lnk, $ldapRes);
+    $groups = [];
+
+    // cycle through the results. first check if there are results
+    if ($results !== false && $results['count'] > 0) {
+        $count = $results['count'];
+        for ($i = 0; $i < $count ;$i++){
+            // get one record from the result
+            $record = $results[$i];
+
+            // get the 'DN' and add it to the array of groups ($groups[] = ... will add a new value)
+            $groups[] = $record['dn'];
+        }
+    }
+    return $groups;
+}
+
 /**
  * Lookup the logged in user (by using the specified UID) in LDAP and return its DistinguishedName (DN)
  * @param $lnk the active link (connected & bound)
@@ -253,3 +315,25 @@ function GetUserDNFromUID($lnk, $uid) {
         return null;
     }
 }// GetUserDNFromUID
+
+function GetRoleDNFromCN($lnk, $cn) {
+    // https://www.php.net/manual/en/function.ldap-search.php
+    $ldapRes = ldap_search($lnk, BASE_DN, "(&(objectClass=groupOfUniqueNames)(cn=${cn}))", ['*'], 0, -1,-1,0);
+    if ($ldapRes ===  false ) {
+        throw new Exception("GetRoleDNFromCN::Cannot execute query");
+    }
+
+    $results = ldap_get_entries($lnk, $ldapRes);
+    if ($results !== false && $results['count'] == 1) {
+        $record = $results[0];
+        if (isset($record['dn'])) {
+            return $record['dn'];
+        }
+        else {
+            return null;
+        }
+    }
+    else {
+        return null;
+    }
+}// GetRoleDNFromCN
