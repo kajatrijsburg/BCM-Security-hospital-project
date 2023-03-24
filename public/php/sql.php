@@ -68,6 +68,12 @@ class DataBase {
         return $this->queryOnce("SELECT userid, voornaam, achternaam, email FROM user JOIN patienten p on user.userid = p.patientid WHERE p.specialistid = $specialistID;");
     }
 
+    function addAppointment($locatie, $online, $datum, $tijd, $specialistid, $patientid){
+        echo $sql = "INSERT INTO afspraken (locatie, online, datum, tijd, specialistid, patientid) 
+                    VALUES ('$locatie', $online, '$datum', '$tijd', $specialistid, $patientid);";
+        $this->queryOnce($sql);
+    }
+
 }
 
 
