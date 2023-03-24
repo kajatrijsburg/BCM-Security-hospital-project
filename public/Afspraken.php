@@ -110,7 +110,14 @@
                     <div class="container">
                         <div>
                             <h1>Afspraken</h1>
-                            <a class="btn btn-success" href="index.php">Maak een nieuwe afspraak</a>
+                            <?php
+                            //if the relevant permissions exist
+                            if (true) {
+                                echo "<a class=\"btn btn-success\" href=\"MaakAfspraak.php\">Maak een nieuwe afspraak</a>";
+                            }
+                            ?>
+
+
                         </div>
                         <table class="table">
                             <thead>
