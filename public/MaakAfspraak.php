@@ -1,3 +1,9 @@
+<?php
+require_once("php/sql.php");
+$db = new DataBase();
+$patienten  = $db->getPatientsForSpecialist(1)
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,9 +111,10 @@
                     </div>
                 </div>
             </div>
+            <!--APPOINTMENT FORM -->
             <div class="col py-3">
                 <h1>Maak een nieuwe afspraak</h1>
-                <form>
+                <form method="post" action="php/process-new-Appointment.php">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="inputLocatie">Locatie</label>
@@ -118,8 +125,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="inputOnline">Virtuele afspraak</label>
                             <select class="form-control" id="inputOnline" name="inputOnline" required>
-                                <option>Ja</option>
-                                <option>Nee</option>
+                                <option value="1">Ja</option>
+                                <option value="0">Nee</option>
                             </select>
                         </div>
                     </div>
@@ -136,7 +143,20 @@
                             <small>Open van 08:00 tot 18:00</small>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="inputPatient">Patient</label>
+                            <select class="form-control" id="inputPatient" name="inputPatient" required>
+                                <?php
+                                foreach ($patienten as $patient){
+                                    echo "<option value=\"" . $patient['userid'] . "\">" . $patient['voornaam'] . " " . $patient["achternaam"] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                     <button class="btn btn-success" type="submit">Maak Afspraak</button>
+                    <a class="btn btn-secondary" href="Afspraken.php">Terug</a>
                 </form>
             </div>
         </div>

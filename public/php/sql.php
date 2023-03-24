@@ -52,14 +52,20 @@ class DataBase {
     }
 
     function getAppointmentsForUser($userID){
-        return $this->queryOnce("SELECT locatie, online, datum, tijd, specialistid, user.achternaam 
-                                FROM afspraken 
-                                LEFT JOIN user on afspraken.specialistid = user.userid 
-                                WHERE patientid = $userID ORDER BY datum;");
+        return $this->queryOnce(
+            "SELECT locatie, online, datum, tijd, specialistid, user.achternaam 
+                    FROM afspraken 
+                    LEFT JOIN user on afspraken.specialistid = user.userid 
+                    WHERE patientid = $userID OR specialistid= $userID 
+                    ORDER BY datum;");
     }
 
     function getTreatmentPlanForUser($userID){
         return $this->queryOnce("SELECT beschrijving, datum FROM behandelplan WHERE userid = $userID;");
+    }
+
+    function getPatientsForSpecialist($specialistID){
+        return $this->queryOnce("SELECT userid, voornaam, achternaam, email FROM user JOIN patienten p on user.userid = p.patientid WHERE p.specialistid = $specialistID;");
     }
 
 }
