@@ -1,3 +1,12 @@
+<?php
+require_once("php/sql.php");
+$db = new DataBase();
+//placeholder variable.
+//When sessions are implemented we should get this variable from the session instead
+$behandelplan = $db->getTreatmentPlanForUser(1)->fetch();
+$db = null;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -113,11 +122,6 @@
                         </div>
                         <div class="card-body">
                             <?php
-                            require_once("php/sql.php");
-                            $db = new DataBase();
-                            //placeholder variable.
-                            //When sessions are implemented we should get this variable from the session instead
-                            $behandelplan = $db->getTreatmentPlanForUser(1)->fetch();
                             echo "<p class=\"card-text\">" . $behandelplan['beschrijving'] . "</p>";
                             ?>
                         </div>
