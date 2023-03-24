@@ -1,5 +1,5 @@
 INSERT INTO user (voornaam, achternaam, email) VALUES ('FirstName', 'lastName', 'exampleemail@test.com');
-INSERT INTO user (voornaam, achternaam, email) VALUES ('DifferentFirstName', 'DifferentFirstName', 'differentexampleemail@test.com');
+INSERT INTO user (voornaam, achternaam, email) VALUES ('DifferentFirstName', 'DifferentLastName', 'differentexampleemail@test.com');
 
 INSERT INTO patienten (specialistid, patientid) VALUES ('1', '2');
 
