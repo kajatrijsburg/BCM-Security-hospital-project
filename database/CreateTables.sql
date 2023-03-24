@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS rol;
 CREATE TABLE rol
 (
     rolid   int          NOT NULL,
@@ -6,6 +8,7 @@ CREATE TABLE rol
     PRIMARY KEY (rolid)
 );
 
+DROP TABLE IF EXISTS permissies;
 CREATE TABLE permissies
 (
     permissieid   int          NOT NULL,
@@ -14,6 +17,7 @@ CREATE TABLE permissies
     PRIMARY KEY (permissieid)
 );
 
+DROP TABLE IF EXISTS rolpermissies;
 CREATE TABLE rolpermissies
 (
     rolpermissiesid int NOT NULL AUTO_INCREMENT,
@@ -24,6 +28,7 @@ CREATE TABLE rolpermissies
     FOREIGN KEY (permiessieid) REFERENCES permissies(permissieid)
 );
 
+DROP TABLE IF EXISTS user;
 CREATE TABLE user
 (
     userid     int          NOT NULL AUTO_INCREMENT,
@@ -33,6 +38,7 @@ CREATE TABLE user
     PRIMARY KEY (userid)
 );
 
+DROP TABLE IF EXISTS medischegegevens;
 CREATE TABLE medischegegevens
 (
     gegevensid   int   NOT NULL AUTO_INCREMENT,
@@ -46,28 +52,29 @@ CREATE TABLE medischegegevens
     FOREIGN KEY (userid) REFERENCES user (userid)
 );
 
+DROP TABLE IF EXISTS voedingsplan;
 CREATE TABLE voedingsplan
 (
     voedingsplanid int  NOT NULL AUTO_INCREMENT,
     beschrijving     text NOT NULL,
     datum date NOT NULL,
     userid         int  NOT NULL,
-    datum timestamp NOT NULL,
     PRIMARY KEY (voedingsplanid),
     FOREIGN KEY (userid) REFERENCES user (userid)
 );
 
+DROP TABLE IF EXISTS behandelplan;
 CREATE TABLE behandelplan
 (
     behandelplanid int NOT NULL AUTO_INCREMENT,
     beschrijving text NOT NULL,
     datum date NOT NULL,
     userid int     NOT NULL,
-    datum timestamp NOT NULL,
     PRIMARY KEY (behandelplanid),
     FOREIGN KEY (userid) REFERENCES user (userid)
 );
 
+DROP TABLE IF EXISTS medicijn;
 CREATE TABLE medicijn
 (
     medicijnid int NOT NULL AUTO_INCREMENT,
@@ -77,7 +84,9 @@ CREATE TABLE medicijn
     userid int NOT NULL,
     PRIMARY KEY (medicijnid),
     FOREIGN KEY (userid) REFERENCES user (userid)
-)
+);
+
+DROP TABLE IF EXISTS patienten;
 CREATE TABLE patienten
 (
     patiententabelid int NOT NULL AUTO_INCREMENT,
@@ -87,17 +96,18 @@ CREATE TABLE patienten
     FOREIGN KEY (specialistid) REFERENCES user (userid),
     FOREIGN KEY (patientid) REFERENCES user (userid)
 );
-
+DROP TABLE IF EXISTS afspraken;
 CREATE TABLE afspraken
 (
-    afsprakenid int NOT NULL AUTO_INCREMENT,
-    locatie varchar(255),
-    online boolean NOT NULL,
-    datum date NOT NULL,
-    tijd time NOT NULL,
-    specialistid int NOT NULL,
-    patientid    int NOT NULL,
+    afsprakenid  int     NOT NULL AUTO_INCREMENT,
+    locatie      varchar(255),
+    online       boolean NOT NULL,
+    datum        date    NOT NULL,
+    tijd         time    NOT NULL,
+    specialistid int     NOT NULL,
+    patientid    int     NOT NULL,
     PRIMARY KEY (afsprakenid),
     FOREIGN KEY (specialistid) REFERENCES user (userid),
     FOREIGN KEY (patientid) REFERENCES user (userid)
 );
+SET FOREIGN_KEY_CHECKS=1;
