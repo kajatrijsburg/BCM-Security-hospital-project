@@ -58,6 +58,10 @@ class DataBase {
                                 WHERE patientid = $userID ORDER BY datum;");
     }
 
+    function getTreatmentPlanForUser($userID){
+        return $this->queryOnce("SELECT beschrijving, datum FROM behandelplan WHERE userid = $userID;");
+    }
+
 }
 
 
