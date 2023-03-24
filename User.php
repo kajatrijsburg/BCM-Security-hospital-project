@@ -49,7 +49,7 @@ class User {
         CreateNewUser($ldap, $dn, $cn, $lastname, $username, $firstName);
         $instance = new User($username);
         $instance->setPassword($password);
-        $instance->addRole(GROUPS_DN);
+        $instance->addRole(new Role(GROUPS_DN));
         ldap_close($ldap);
         return $instance;
     }
@@ -59,7 +59,7 @@ class User {
      */
     function addRole($role) {
         $ldap = ConnectAndCheckLDAP();
-        AddUserToGroup($ldap, $role, $this->distinguishedName);
+        AddUserToGroup($ldap, $role->dn, $this->distinguishedName);
         $this->updateRoles($ldap);
         ldap_close($ldap);
     }

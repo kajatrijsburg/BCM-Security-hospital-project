@@ -3,6 +3,11 @@ require_once 'public/intranet/ldap_support.inc.php';
 require_once 'public/intranet/ldap_constants.inc.php';
 Class Role {
 
+    public $name;
+    // TODO: Map permissions from DB
+    public $permissions;
+    public $dn;
+
     static function createApplicationRole($cn) {
         Role::createRole($cn, USERS_APPLICATION_DN);
     }
@@ -15,13 +20,23 @@ Class Role {
         Role::createRole($cn, USERS_EXTERN_DN);
     }
 
+    function __construct($dn) {
+    $this->dn = $dn;
+    $explode = ldap_explode_dn($dn, 0);
+    $this->name = str_replace('cn=', '', $explode[0]);
+    }
+
     /**
      * @throws Exception
      */
     static function getAll() {
         $ldap = ConnectAndCheckLDAP();
-        $roles = GetAllLDAPGroups();
+        $roleDNs = GetAllLDAPGroups($ldap);
         ldap_close($ldap);
+        $roles = [];
+        foreach ($roleDNs as $roleDN) {
+            $roles[] = new Role($roleDN);
+        }
         return $roles;
     }
 
