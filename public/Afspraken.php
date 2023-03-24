@@ -107,6 +107,47 @@
                     </div>
                 </div>
                 <div class="col py-3">
+                    <div class="container">
+                        <div>
+                            <h1>Afspraken</h1>
+                            <a class="btn btn-success" href="index.php">Maak een nieuwe afspraak</a>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <th scope="col">Locatie</th>
+                            <th scope="col">Online</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Tijd</th>
+                            <th scope="col">Specialist</th>
+                            </thead>
+                            <tbody>
+                            <?php
+                            require_once("php/sql.php");
+                            $db = new DataBase();
+                            $result = $db->getAppointmentsForUser(1); //temp placeholder number, should obtain this from session
+
+                            //render the appointments
+                            foreach ($result as $row){
+                                echo "<tr>";
+                                echo "<td>" . $row["locatie"] . "</td>";
+                                if ($row["online"] == 1){
+                                    echo "<td>Ja</td>";
+                                }else{
+                                    echo "<td>Nee</td>";
+                                }
+                                echo "<td>" . $row["datum"] . "</td>";
+                                echo "<td>" . $row["tijd"] . "</td>";
+                                echo "<td>" . $row["achternaam"] . "</td>";
+                                echo "</tr>";
+                            }
+
+                            $result = null; //clear result
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+
 
                 </div>
             </div>
@@ -119,7 +160,7 @@
       <!--Main layout-->
       <main style="margin-top: 58px">
         <div class="container pt-4">
-      
+
         </div>
       </main>
 

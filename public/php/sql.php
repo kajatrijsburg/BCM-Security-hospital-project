@@ -51,7 +51,12 @@ class DataBase {
         return $statement;
     }
 
-
+    function getAppointmentsForUser($userID){
+        return $this->queryOnce("SELECT locatie, online, datum, tijd, specialistid, user.achternaam 
+                                FROM afspraken 
+                                LEFT JOIN user on afspraken.specialistid = user.userid 
+                                WHERE patientid = $userID ORDER BY datum;");
+    }
 
 }
 
