@@ -121,9 +121,7 @@ $db = null;
                             <h1>Behandelplan</h1>
                         </div>
                         <div class="card-body">
-                            <?php
-                            echo "<p class=\"card-text\">" . $behandelplan['beschrijving'] . "</p>";
-                            ?>
+                            <p class="card-text"> <?php echo $behandelplan['beschrijving']  ?></p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text"> <small class="text-muted"> <?php echo $behandelplan['datum'] ?></small></p>
