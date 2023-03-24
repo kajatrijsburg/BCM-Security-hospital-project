@@ -12,8 +12,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
-   
-    
+
     <title>ESALA</title>
   </head>
   <body>
@@ -108,18 +107,24 @@
                 </div>
                 <div class="col py-3">
                     <!--Behandelplan -->
-                    <table>
-                        <tr>
-
-                        </tr>
-                        <?php
-
-                        ?>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Behandelplan</h1>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            require_once("php/sql.php");
+                            $db = new DataBase();
+                            //placeholder variable.
+                            //When sessions are implemented we should get this variable from the session instead
+                            $behandelplan = $db->getTreatmentPlanForUser(1)->fetch();
+                            echo "<p class=\"card-text\">" . $behandelplan['beschrijving'] . "</p>";
+                            ?>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text"> <small class="text-muted"> <?php echo $behandelplan['datum'] ?></small></p>
+                        </div>
+                    </div>
                     <!--Voedselplan -->
                 </div>
             </div>
