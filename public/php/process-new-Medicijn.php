@@ -30,5 +30,5 @@ $db = new DataBase();
 $db->addMedicine($input["Medicijnnaam"], $input["Beschrijving"], $input["Dosis"], $patientID);
 $db = null;
 
-header('location: ' . 'http://energy.org/Medicijnen.php', true);
+header('location: ' . 'http://energy.org/intranet/Medicijnen.php', true);
 exit();

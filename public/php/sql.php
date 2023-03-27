@@ -80,29 +80,29 @@ class DataBase {
     }
 
     function getPrescriptedMedicineForUser($UserID){
-        return $this->queryOnce("SELECT medicijnnaam, beschrijving, dosis FROM medicijn WHERE userid = $UserID");
+        return $this->queryOnce("SELECT medicijnnaam, beschrijving, dosis FROM medicijn WHERE userid = :UserID", [$UserID]);
     }
 
     function getUserInfo($UserID){
-        return $this->queryOnce("SELECT voornaam, achternaam, email FROM user WHERE userid = $UserID");
+        return $this->queryOnce("SELECT voornaam, achternaam, email FROM user WHERE userid = :UserID", [$UserID]);
     }
 
     function addMedicine($Medicijnnaam, $Beschrijving, $Dosis, $patientid){
         $sql = "INSERT INTO medicijn (medicijnnaam, beschrijving, dosis, userid) 
-                    VALUES ('$Medicijnnaam', '$Beschrijving', '$Dosis', '$patientid')";
-        $this->queryOnce($sql);
+                    VALUES (:medicijnnaam, :beschrijving, :dosis, :userid)";
+        $this->queryOnce($sql, [$Medicijnnaam, $Beschrijving, $Dosis, $patientid]);
     }
 
     function getUserID($userEmail){
-        $userids = $this->queryOnce("SELECT userid FROM user WHERE email = '$userEmail'");
+        $userids = $this->queryOnce("SELECT userid FROM user WHERE email = :email", [$userEmail]);
         foreach($userids as $userid){
             return $userid['userid'];
         }
     }
 
     function addPatient($specialistid, $patientid){
-        $sql = "INSERT INTO patienten (specialistid, patientid) VALUES ('$specialistid', '$patientid')";
-        $this->queryOnce($sql);
+        $sql = "INSERT INTO patienten (specialistid, patientid) VALUES (:specialistid, :patientid)";
+        $this->queryOnce($sql, [$specialistid, $patientid]);
     }
 
 }

@@ -29,5 +29,5 @@ $dokterID = $db->getUserID($input["Emaildokter"]);
 $db->addPatient($dokterID, $patientID);
 $db = null;
 
-header('location: ' . 'http://energy.org/patient-toevoegen.php', true);
+header('location: ' . 'http://energy.org/intranet/patient-toevoegen.php', true);
 exit();
