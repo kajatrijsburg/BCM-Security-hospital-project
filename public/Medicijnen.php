@@ -111,10 +111,30 @@
                         Naam medicijn: <input type="text">
                         <input type="submit">
                     </form>
-                    <table>
-
-                    </table>
-                </div>
+                    <?php
+                    require_once("php/sql.php");
+                    $db = new DataBase();
+                    //placeholder variable.
+                    //When sessions are implemented we should get this variable from the session instead
+                    $medicijn = $db->getPrescriptedMedicineForUser(1);
+                    $userinfo = $db-> getUserInfo(1)->fetch();
+                    ?>
+                    <?php
+                    foreach($medicijn as $medic){
+                        echo "<div class=\"card\">";
+                        echo "<div class=\"card-header\">";
+                        echo "<h5>" . $medic['medicijnnaam'] . "</h5>";
+                        echo "</div>";
+                        echo "<div class=\"card-body\">";
+                        echo "<p class=\"card-text\">" . $medic['beschrijving'] . "</p>";
+                        echo "<p class=\"card-text\">" . $medic['dosis'] . " mg" . "</p>";
+                        echo "</div>";
+                        echo "<div class=\"card-footer\">";
+                        echo "<p small class=\"card-text\">" . $userinfo['voornaam'] . " " . $userinfo['achternaam'] . " email: " . $userinfo['email'] . "</p>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    ?>
             </div>
         </div>
         <!-- Sidebar -->
