@@ -1,5 +1,5 @@
 <?php
-require_once("php/sql.php");
+require_once("../php/sql.php");
 $db = new DataBase();
 ?>
 
@@ -11,7 +11,7 @@ $db = new DataBase();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link href="css/main.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link
         rel="stylesheet"
@@ -34,7 +34,7 @@ $db = new DataBase();
             <!-- Brand -->
             <a class="navbar-brand" href="#">
                 <img
-                    src="Image/logo.svg"
+                    src="../Image/logo.svg"
                     height="50"
                     alt=""
                     loading="lazy"
@@ -42,7 +42,7 @@ $db = new DataBase();
             </a>
             <a class="navbar-brand" href="#">
                 <img
-                    src="Image/Naamloos.png"
+                    src="../Image/Naamloos.png"
                     height="50"
                     alt=""
                     loading="lazy"
@@ -113,7 +113,7 @@ $db = new DataBase();
             <!--APPOINTMENT FORM -->
             <div class="col py-3">
                 <h1>Patient toevoegen</h1>
-                <form method="post" action="php/process-add-patient.php">
+                <form method="post" action="../php/process-add-patient.php">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="email van patient">email patiënt</label>
@@ -128,7 +128,7 @@ $db = new DataBase();
                     </div>
                     <div class="form-row">
                     <button class="btn btn-success" type="submit">Patiënt toevoegen</button>
-                    <a class="btn btn-secondary" href="index.php">Terug</a>
+                    <a class="btn btn-secondary" href="../index.php">Terug</a>
                 </form>
             </div>
         </div>
@@ -145,7 +145,7 @@ $db = new DataBase();
     </div>
 </main>
 
-<script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+<script src="../bootstrap/js/bootstrap.bundle.min.js" ></script>
 
 
 
