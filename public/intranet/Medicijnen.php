@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <link href="css/main.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
       <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link
       rel="stylesheet"
@@ -30,7 +30,7 @@
      <!-- Brand -->
      <a class="navbar-brand" href="#">
        <img
-            src="Image/logo.svg"
+            src="../Image/logo.svg"
             height="50"
             alt=""
             loading="lazy"
@@ -38,7 +38,7 @@
      </a>
      <a class="navbar-brand" href="#">
       <img
-           src="Image/Naamloos.png"
+           src="../Image/Naamloos.png"
            height="50"
            alt=""
            loading="lazy"
@@ -129,7 +129,7 @@
         </div>
       </main>
 
-    <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js" ></script>
     
 
   </body>

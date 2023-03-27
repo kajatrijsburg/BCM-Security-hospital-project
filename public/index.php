@@ -53,7 +53,7 @@
                     <p class="lead">
                         log in om verder te gaan naar het intranet
                     </p>
-                    <a class="btn btn-primary btn-lg" href="#">Log In</a>
+                    <a class="btn btn-primary btn-lg" href="intranet/Dashboard.php">Log In</a>
                     <a href="SignUp.php" class="btn btn-secondary btn-lg">Maak een account</a>
 
                 </figure>
@@ -92,13 +92,7 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
+    
     <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
     
 
