@@ -113,7 +113,7 @@ $db = new DataBase();
             <!--APPOINTMENT FORM -->
             <div class="col py-3">
                 <h1>Patient toevoegen</h1>
-                <form method="post" action="../php/process-add-patient.php">
+                <form method="post" action="css/process-add-patient.php">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="email van patient">email patiënt</label>

@@ -1,5 +1,5 @@
 <?php
-require_once("php/sql.php");
+require_once("../php/sql.php");
 $db = new DataBase();
 $patienten  = $db->getPatientsForSpecialist(1)
 ?>
@@ -64,7 +64,7 @@ $patienten  = $db->getPatientsForSpecialist(1)
             <!--APPOINTMENT FORM -->
             <div class="col py-3">
                 <h1>Maak een nieuwe afspraak</h1>
-                <form method="post" action="../php/process-new-Appointment.php">
+                <form method="post" action="css/process-new-Appointment.php">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="inputLocatie">Locatie</label>
