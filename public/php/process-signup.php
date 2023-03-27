@@ -2,6 +2,8 @@
 require_once("sql.php");
 require_once("clean-input.php");
 
+include_once "../../User.php";
+
 //get the input
 $firstName = trimAndClean($_POST['firstName']);
 $lastName = trimAndClean($_POST['lastName']);
@@ -58,9 +60,23 @@ $db = new DataBase();
 $pdo = $db->createPDO();
 
 //check if email address is already used
-$statement = $pdo->prepare("SELECT FROM user WHERE email=$email");
+$statement = $pdo->prepare("SELECT * FROM user WHERE email=:email");
+$statement->execute([$email]);
 $count = $statement->rowCount();
 
 if($count > 0){
     die("Dit email adres is al in gebruik");
 }
+
+$statement = null;
+
+//IF THIS POINT IS REACHED< ALL DATA MUST BE VERIFIED
+
+//insert user into database
+$statement = $pdo->prepare("INSERT INTO user (voornaam, achternaam, email) VALUES (:firstName, :lastName, :email);");
+$statement->execute([$firstName, $lastName, $email]);
+$statement = null;
+$pdo = null;
+
+//insert user into LDAP
+User::createInternal($firstName, $lastName, $email, $password1);
