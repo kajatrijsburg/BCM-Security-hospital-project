@@ -57,24 +57,30 @@
                 <? include_once '../partials/sidebar.php';?>
                 <div class="col py-3">
                     <!--Behandelplan -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h1>Behandelplan</h1>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            require_once("php/sql.php");
-                            $db = new DataBase();
-                            //placeholder variable.
-                            //When sessions are implemented we should get this variable from the session instead
-                            $behandelplan = $db->getTreatmentPlanForUser(1)->fetch();
-                            echo "<p class=\"card-text\">" . $behandelplan['beschrijving'] . "</p>";
-                            ?>
-                        </div>
-                        <div class="card-footer">
-                            <p class="card-text"> <small class="text-muted"> <?php echo $behandelplan['datum'] ?></small></p>
-                        </div>
-                    </div>
+                    <?php
+                    require_once("../php/sql.php");
+                    $db = new DataBase();
+                    //placeholder variable.
+                    //When sessions are implemented we should get this variable from the session instead
+                    $behandelplan = $db->getTreatmentPlanForUser(1)->fetch();
+
+                    if (empty($behandelplan)) {
+                        echo "<h2>De specialist heeft nog geen behandel plan voor u aangemaakt</h2>";
+                    }else{
+                        echo
+                        "<div class=\"card\">
+                            <div class=\"card-header\">
+                                <h1>Behandelplan</h1>
+                            </div>
+                            <div class=\"card-body\">
+                                <p class=\"card-text\">" . $behandelplan['beschrijving'] . "</p>
+                            </div>
+                            <div class=\"card-footer\">
+                                <p class=\"card-text\"> <small class=\"text-muted\"> ". $behandelplan["datum"] . "</small></p>
+                            </div>
+                        </div>";
+                    } ?>
+                </div>
                     <!--Voedselplan -->
                 </div>
             </div>
