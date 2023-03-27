@@ -79,6 +79,32 @@ class DataBase {
         $this->queryOnce($sql, [$locatie, $online, $datum, $tijd, $specialistid, $patientid]);
     }
 
+    function getPrescriptedMedicineForUser($UserID){
+        return $this->queryOnce("SELECT medicijnnaam, beschrijving, dosis FROM medicijn WHERE userid = $UserID");
+    }
+
+    function getUserInfo($UserID){
+        return $this->queryOnce("SELECT voornaam, achternaam, email FROM user WHERE userid = $UserID");
+    }
+
+    function addMedicine($Medicijnnaam, $Beschrijving, $Dosis, $patientid){
+        $sql = "INSERT INTO medicijn (medicijnnaam, beschrijving, dosis, userid) 
+                    VALUES ('$Medicijnnaam', '$Beschrijving', '$Dosis', '$patientid')";
+        $this->queryOnce($sql);
+    }
+
+    function getUserID($userEmail){
+        $userids = $this->queryOnce("SELECT userid FROM user WHERE email = '$userEmail'");
+        foreach($userids as $userid){
+            return $userid['userid'];
+        }
+    }
+
+    function addPatient($specialistid, $patientid){
+        $sql = "INSERT INTO patienten (specialistid, patientid) VALUES ('$specialistid', '$patientid')";
+        $this->queryOnce($sql);
+    }
+
 }
 
 
