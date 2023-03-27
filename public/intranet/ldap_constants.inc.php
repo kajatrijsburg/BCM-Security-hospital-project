@@ -54,8 +54,8 @@ define("LDAP_PORT",389);
  * The user that is used to connect to the LDAP-store to query and make changes.
  * <strong>Problem: this user has too many rights and cn=webuserldap,.... has not enough.</strong>
  */
-define("LDAP_ADMIN_CN","cn=admin, dc=energy, dc=org");
-
+//define("LDAP_ADMIN_CN","cn=admin, dc=energy, dc=org");
+define("LDAP_ADMIN_CN", "cn=webuserldap,ou=application,o=Energy,dc=energy,dc=org");
 // FIXME: Investigate how to prevent plaintext passwords.
 /**
  * Plaintext password. <strong>This should be prevented!</strong>
