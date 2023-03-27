@@ -12,7 +12,7 @@ $patienten  = $db->getPatientsForSpecialist(1)
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link href="css/main.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link
         rel="stylesheet"
@@ -35,7 +35,7 @@ $patienten  = $db->getPatientsForSpecialist(1)
             <!-- Brand -->
             <a class="navbar-brand" href="#">
                 <img
-                    src="Image/logo.svg"
+                    src="../Image/logo.svg"
                     height="50"
                     alt=""
                     loading="lazy"
@@ -43,7 +43,7 @@ $patienten  = $db->getPatientsForSpecialist(1)
             </a>
             <a class="navbar-brand" href="#">
                 <img
-                    src="Image/Naamloos.png"
+                    src="../Image/Naamloos.png"
                     height="50"
                     alt=""
                     loading="lazy"
@@ -114,7 +114,7 @@ $patienten  = $db->getPatientsForSpecialist(1)
             <!--APPOINTMENT FORM -->
             <div class="col py-3">
                 <h1>Maak een nieuwe afspraak</h1>
-                <form method="post" action="php/process-new-Appointment.php">
+                <form method="post" action="../php/process-new-Appointment.php">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="inputLocatie">Locatie</label>
@@ -173,7 +173,7 @@ $patienten  = $db->getPatientsForSpecialist(1)
     </div>
 </main>
 
-<script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+<script src="../bootstrap/js/bootstrap.bundle.min.js" ></script>
 
 
 

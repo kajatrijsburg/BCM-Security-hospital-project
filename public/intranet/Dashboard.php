@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link href="css/main.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link
         rel="stylesheet"
@@ -30,7 +30,7 @@
             <!-- Brand -->
             <a class="navbar-brand" href="#">
                 <img
-                    src="Image/logo.svg"
+                    src="../Image/logo.svg"
                     height="50"
                     alt=""
                     loading="lazy"
@@ -38,7 +38,7 @@
             </a>
             <a class="navbar-brand" href="#">
                 <img
-                    src="Image/Naamloos.png"
+                    src="../Image/Naamloos.png"
                     height="50"
                     alt=""
                     loading="lazy"
@@ -127,7 +127,7 @@
                         ?>
                     </table>
                     <!-- het form hieronder is voor wanneer een specifieke bhenadeling wordt geanuleerd door de patiënt -->
-                    <form action="index.php" method="post">
+                    <form action="../index.php" method="post">
                         <label>Redenering voor annuleren:</label>
                         <input type="text">
                     </form>
@@ -146,7 +146,7 @@
             </div>
             <!-- deze moet voor patiënten hidden zijn maar voor experts die behandelen zichtbaar zijn -->
             <div>
-                <form action="index.php" method="post">
+                <form action="../index.php" method="post">
                     PatiëntId: <input type="text">
                 </form>
                 <table>
@@ -164,7 +164,7 @@
                     </tr>
                 </table>
                 <!--redenering naar de patiënt toe voor annuleren specifieke behandeling/afspraak -->
-                <form action="index.php" method="post">
+                <form action="../index.php" method="post">
                     <label>Bericht naar patiënt over annuleren</label>
                     <input type="text">
                 </form>
@@ -183,7 +183,7 @@
     </div>
 </main>
 
-<script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+<script src="../bootstrap/js/bootstrap.bundle.min.js" ></script>
 
 
 </body>
