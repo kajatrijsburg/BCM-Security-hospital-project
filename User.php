@@ -1,6 +1,7 @@
 <?php
 require_once 'public/intranet/ldap_support.inc.php';
 require_once 'public/intranet/ldap_constants.inc.php';
+require_once 'Role.php';
 class User {
     public $firstName;
     public $lastName;

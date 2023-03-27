@@ -36,13 +36,13 @@ class DataBase {
         }
     }
 
-    function queryOnce($SQL){
+    function queryOnce($SQL, $arr){
         //open connection
         $pdo = $this->createPDO();
 
         //execute sql
         $statement = $pdo->prepare($SQL);
-        $statement->execute();
+        $statement->execute($arr);
 
         //close connection
         $pdo= null;
@@ -52,14 +52,31 @@ class DataBase {
     }
 
     function getAppointmentsForUser($userID){
-        return $this->queryOnce("SELECT locatie, online, datum, tijd, specialistid, user.achternaam 
-                                FROM afspraken 
-                                LEFT JOIN user on afspraken.specialistid = user.userid 
-                                WHERE patientid = $userID ORDER BY datum;");
+        $specialistID = $userID;
+        return $this->queryOnce(
+            "SELECT locatie, online, datum, tijd, specialistid, user.achternaam 
+                    FROM afspraken 
+                    LEFT JOIN user on afspraken.specialistid = user.userid 
+                    WHERE patientid = :userID OR specialistid= :specialistID 
+                    ORDER BY datum;",
+                    [$userID, $specialistID]);
     }
 
     function getTreatmentPlanForUser($userID){
-        return $this->queryOnce("SELECT beschrijving, datum FROM behandelplan WHERE userid = $userID;");
+        return $this->queryOnce("SELECT beschrijving, datum FROM behandelplan WHERE userid = :userID;", [$userID]);
+    }
+
+    function getPatientsForSpecialist($specialistID){
+        return $this->queryOnce("SELECT userid, voornaam, achternaam, email 
+                                FROM user JOIN patienten p on user.userid = p.patientid 
+                                WHERE p.specialistid = :specialistID;",
+                                [$specialistID]);
+    }
+
+    function addAppointment($locatie, $online, $datum, $tijd, $specialistid, $patientid){
+        echo $sql = "INSERT INTO afspraken (locatie, online, datum, tijd, specialistid, patientid) 
+                    VALUES (:locatie, :online, :datum, :tijd, :specialistid, :patientid);";
+        $this->queryOnce($sql, [$locatie, $online, $datum, $tijd, $specialistid, $patientid]);
     }
 
     function getPrescriptedMedicineForUser($UserID){
