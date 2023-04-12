@@ -5,6 +5,8 @@ require_once("../../User.php");
 require_once ("../php/clean-input.php");
 require_once ("../php/permissies.php");
 
+requirePermission($_SESSION, Permissions::$manageRoles);
+
 $db = new DataBase();
 
 function renderPermissionOption($currentPermissions, $permission){

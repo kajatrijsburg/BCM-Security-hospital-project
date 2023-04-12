@@ -13,3 +13,6 @@ function requirePermission($session, $permission){
         die("access denied");
     }
 }
+function hasPermission($session, $permission){
+    return !empty($session["PERMISSIONS"][$permission]);
+}
