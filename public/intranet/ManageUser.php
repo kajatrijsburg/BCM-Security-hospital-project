@@ -37,6 +37,7 @@ if (!empty($_POST["addRole"]) && $_POST["addRole"]=="true"){
     $roleName = trimAndClean($_POST["roleToAdd"]);
     $role = Role::byName($roleName);
     $user->addRole($role);
+    $db->log($_SESSION, "Voegde de " . $role->name . " rol toe aan " . $user->firstName . " " . $user->lastName);
 }
 
 if (!empty($_POST["removeRole"]) && $_POST["removeRole"]=="true"){
@@ -48,6 +49,8 @@ if (!empty($_POST["removeRole"]) && $_POST["removeRole"]=="true"){
     $roleName = substr($roleName, $equalsPos, $len);
     $role = Role::byName($roleName);
     $user->removeRole($role);
+
+    $db->log($_SESSION, "Verwijderde de " . $role->name . " rol toe aan " . $user->firstName . " " . $user->lastName);
 }
 ?>
 

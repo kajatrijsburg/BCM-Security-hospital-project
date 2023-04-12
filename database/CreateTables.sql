@@ -110,4 +110,16 @@ CREATE TABLE afspraken
     FOREIGN KEY (specialistid) REFERENCES user (userid),
     FOREIGN KEY (patientid) REFERENCES user (userid)
 );
+
+DROP TABLE IF EXISTS gebruikgeschiedenis;
+CREATE TABLE gebruikgeschiedenis
+(
+  geschiedenisid    int     NOT NULL AUTO_INCREMENT,
+  actie             text    NOT NULL,
+  userid            int     NOT NULL,
+  datum             date     NOT NULL,
+  tijd              time    NOT NULL,
+  PRIMARY KEY (geschiedenisid),
+  FOREIGN KEY (userid) REFERENCES user (userid)
+);
 SET FOREIGN_KEY_CHECKS=1;

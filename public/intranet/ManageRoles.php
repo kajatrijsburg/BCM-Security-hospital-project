@@ -39,7 +39,8 @@ if(!empty($_POST["roleToEdit"])){
     addPermissionIfExist($permission, Permissions::$manageAppointments);
     addPermissionIfExist($permission, Permissions::$manageMedication);
 
-    echo $db->updateRolePermissions(trimAndClean($_POST["roleToEdit"]), $permission);
+    $db->updateRolePermissions(trimAndClean($_POST["roleToEdit"]), $permission);
+    $db->log($_SESSION, "Wijzigde de " . $_POST["roleToEdit"] . " rolpermissies");
 }
 ?>
 
