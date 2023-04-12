@@ -1,5 +1,6 @@
 <?php
 include_once("../partials/session_part.php");
+require_once ("../php/permissies.php");
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +70,8 @@ include_once("../partials/session_part.php");
                             <?php
                             require_once("../php/sql.php");
                             $db = new DataBase();
-                            $behandelplan = $db->getTreatmentPlanForUser($_SESSION["USER_ID"])->fetch();
+                            $currentuserid = $db->getUserID($_SESSION["USER_ID"]);
+                            $behandelplan = $db->getTreatmentPlanForUser($currentuserid)->fetch();
                             if(empty($behandelplan)){
                                 $text = "<p class=\"card-text\">" . "U heeft nog geen behandelplan" . "</p>";
                             }else{
@@ -90,7 +92,27 @@ include_once("../partials/session_part.php");
                             <p class="card-text"> <small class="text-muted"> <?php echo $datum?></small></p>
                         </div>
                     </div>
-                    <!--Voedselplan -->
+                    <?
+                    if (hasPermission($_SESSION, Permissions::$manageTreatmentPlan))
+                        echo "<form action='AddTreatmentPlan.php' method='post'>
+                                <select name='id'>";
+
+                    $db = new DataBase();
+                    $users = $db->getUsers("");
+                    foreach ($users as $user) {
+                        $email = array_pop($user);
+                        $lastname = array_pop($user);
+                        $firstname = array_pop($user);
+                        $id = array_pop($user);
+                        echo "<option value=". $id . ">" . $email . ", " . $lastname . "</option>";
+                    }
+
+
+                    echo     "</select>
+                            <button class='btn btn-success m-3' href='AddTreatmentPlan.php'>Beheer behandelplan</button>
+                        </form>";
+                    ?>
+
                 </div>
             </div>
         </div>

@@ -2,12 +2,27 @@
 require_once("../php/sql.php");
 include_once("../partials/session_part.php");
 require_once ("../php/permissies.php");
-requirePermission($_SESSION, Permissions::$managePermissions);
+requirePermission($_SESSION, Permissions::$manageTreatmentPlan);
 
 $db = new DataBase();
+if(!empty( $_POST["id"])){
+    $id =  $_POST["id"];
+}else{
+    header('location: ' . 'http://energy.org/intranet/Behandelplan.php', true);
+    die("missing user id");
+}
+
+//if a treatment plan exists, get it
+$plan = $db->getTreatmentPlanForUser($id)->fetch();
+$description = "";
+if(!empty($plan)){
+    $description = $plan['beschrijving'];
+}
+
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -64,45 +79,17 @@ $db = new DataBase();
         <div class="row flex-nowrap ">
             <? include_once '../partials/sidebar.php';?>
             <div class="col py-3">
-                <h1>Gebruikers</h1>
-                <div>
-                    <form action="RBAC.php" method="post">
-                        <input type="hidden" name="search">
-                        <button class="btn btn-secondary">Alle Gebruikers</button>
-                    </form>
-                    <form action="RBAC.php" method="post">
-                        <input name="search">
-                        <button class="btn btn-success">Zoek</button>
-                    </form>
+                <form method="post" action="../php/process-treatment-plan.php">
+                    <input class="form-select" name="user" type="hidden" value="<?echo $id?>">
+                    <div class="form-group">
+                        <label class="form-label">Behandelplan</label>
+                        <textarea name="description" class="form-control" rows="10"> <? echo $description?> </textarea>
+                    </div>
+                    <div class="form-group m-3">
+                        <button type="submit" class="btn btn-success">Opslaan</button>
+                    </div>
 
-                </div>
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Voornaam</th>
-                        <th scope="col">Achternaam</th>
-                        <th scope="col">Email adres</th>
-                        <th scope="col">Manage</th>
-                    </tr>
-                    </thead>
-                    <?php
-                    $searchInput = "";
-                    if(!empty($_POST["search"])){
-                        $searchInput = $_POST["search"];
-                    }
-                    $result = $db->getUsers($searchInput);
-
-                    foreach ($result as $row){
-                        echo "<tr>";
-                        echo "<td>" . $row["voornaam"] . "</td>";
-                        echo "<td>" . $row["achternaam"] . "</td>";
-                        echo "<td>" . $row["email"] . "</td>";
-                        echo "<td> <form action='ManageUser.php' method='post'><input type='hidden' value='" . $row["email"] . "' name='id'><button class='btn btn-success' type='submit'>Manage</button></form></td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </table>
+                </form>
             </div>
         </div>
     </div>
@@ -122,4 +109,4 @@ $db = new DataBase();
 
 
 </body>
-</html>
+    </html><?php

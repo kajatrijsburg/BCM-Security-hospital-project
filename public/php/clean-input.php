@@ -5,6 +5,28 @@ function trimAndClean($dataString){
     return $dataString;
 }
 
+function validateID($id){
+    $id = (int)trimAndClean($id);
+    if (empty($id)){
+        die("id is verplicht " . $id);
+    }
+    if (!is_numeric($id)){
+        die("id has to be a number :" . $id);
+    }
+    return $id;
+}
+
+function validateText($text){
+    $text = trimAndClean($text);
+    if (empty($text)){
+        die("text is verplicht");
+    }
+    if (!is_string($text)){
+        die("text has to be a string");
+    }
+    return $text;
+}
+
 function validateFirstName($firstName){
     $firstName = trimAndClean($firstName);
     if (empty($firstName)){

@@ -63,9 +63,10 @@ class DataBase {
                     [$userID, $specialistID]);
     }
 
-    function getTreatmentPlanForUser($userID){
-        return $this->queryOnce("SELECT beschrijving, datum FROM behandelplan WHERE userid = :userID;", [$userID]);
+    function getTreatmentPlanForUser($userid){
+        return $this->queryOnce("SELECT beschrijving, datum FROM behandelplan WHERE userid = :userid;", [$userid]);
     }
+
 
     function getPatientsForSpecialist($specialistID){
         return $this->queryOnce("SELECT userid, voornaam, achternaam, email 
@@ -92,6 +93,14 @@ class DataBase {
         $sql = "INSERT INTO medicijn (medicijnnaam, beschrijving, dosis, userid) 
                     VALUES (:medicijnnaam, :beschrijving, :dosis, :userid)";
         $this->queryOnce($sql, [$Medicijnnaam, $Beschrijving, $Dosis, $patientid]);
+    }
+
+    function addTreatmentPlan($id, $description, $date){
+        $sql = "DELETE FROM behandelplan WHERE userid = :id";
+        $this->queryOnce($sql, [$id]);
+
+        $sql = "INSERT INTO behandelplan (beschrijving, datum, userid) VALUES (:description, :date, :id  )";
+        $this->queryOnce($sql, [$description, $date, $id]);
     }
 
     function getUserID($userEmail){
