@@ -6,6 +6,7 @@
 //this means that if php code execution is gained attackers will be able to leak credentials
 
 require_once($_SERVER['DOCUMENT_ROOT']."/../credentials.php");
+require_once ("clean-input.php");
 class DataBase {
     private $credentials;
 
@@ -100,11 +101,74 @@ class DataBase {
         }
     }
 
+    function getUser($userEmail){
+        return $this->queryOnce("SELECT * FROM user WHERE email = :email", [$userEmail]);
+    }
+
     function addPatient($specialistid, $patientid){
         $sql = "INSERT INTO patienten (specialistid, patientid) VALUES (:specialistid, :patientid)";
         $this->queryOnce($sql, [$specialistid, $patientid]);
     }
 
+    function getUsers($searchValue){
+
+        if(empty($searchValue)){
+            $sql = "SELECT * FROM user";
+            return $this->queryOnce($sql, []);
+        }else{
+            $searchValue = trimAndClean($searchValue);
+            $sql = "SELECT * FROM user WHERE :searchValue in(voornaam, achternaam, email)";
+            return $this->queryOnce($sql, [$searchValue]);
+        }
+    }
+
+    function getRolePermissions($rolename){
+        $sql = "SELECT p.permissienaam FROM rol 
+                JOIN rolpermissies rp ON rol.rolid = rp.rolid 
+                JOIN permissies p on rp.permissieid = p.permissieid 
+                WHERE rolnaam = :rolname";
+
+        $statement = $this->queryOnce($sql, [$rolename])->fetchAll();
+
+        if (empty($statement)){
+            return [];
+        }
+        $permissions = [];
+        foreach ($statement as $row){
+            $val = array_pop($row);
+            $permissions[$val] = $val;
+        }
+
+        return $permissions;
+    }
+
+    function updateRolePermissions($rolename, $permissions){
+        //before anything we need the role ID
+        $sql = "SELECT rolid FROM rol WHERE rolnaam = :rolename";
+        $rolid = $this->queryOnce($sql, [$rolename])->fetch();
+        $rolid =  array_pop($rolid);
+        //we're doing this the lazy way
+        //first we just delete all permissions
+        $sql = "DELETE FROM rolpermissies WHERE rolid = :rolid";
+        $this->queryOnce($sql, [$rolid]);
+        //and then we set the permissions we want
+
+        foreach ($permissions as $permissionname => $status){
+            if (empty($status) || $status == false){
+                continue;
+            }
+            $permission = trimAndClean($permissionname); //this prevents a bug somehow
+            //wrong way get the permissionID
+            $sql = "SELECT permissieid FROM permissies WHERE permissienaam = :permission";
+            $permissionid = $this->queryOnce($sql, [$permission])->fetch();
+
+            $permissionid = array_pop($permissionid);
+
+            $sql = "INSERT INTO rolpermissies (rolid, permissieid) VALUES (:rolid, :permissionid)";
+            $this->queryOnce($sql, [$rolid, $permissionid]);
+
+        }
+    }
 }
 
 

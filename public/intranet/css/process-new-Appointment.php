@@ -1,6 +1,10 @@
 <?php
-require_once("sql.php");
-require_once("clean-input.php");
+require_once("../../php/sql.php");
+require_once("../../php/clean-input.php");
+require_once("../../php/permissies.php");
+include_once("../../partials/session_part.php");
+
+requirePermission($_SESSION, Permissions::$manageAppointments);
 
 $input = array(
     "Locatie" =>  trimAndClean($_POST["inputLocatie"]),
@@ -48,7 +52,7 @@ $db = new DataBase();
 $db->addAppointment($input["Locatie"], $input["Online"], $input["Datum"], $input["Tijd"], $specialistID, $input["Patient"]);
 $db = null;
 
-header('location: ' . 'http://energy.org/Afspraken.php', true);
+//header('location: ' . 'http://energy.org/intranet/Afspraken.php', true);
 exit();
 
 

@@ -70,7 +70,7 @@ class User {
      */
     function removeRole($role) {
         $ldap = ConnectAndCheckLDAP();
-        RemoveUserFromGroup($ldap, $role, $this->distinguishedName);
+        RemoveUserFromGroup($ldap, $role->dn, $this->distinguishedName);
         $this->updateRoles($ldap);
         ldap_close($ldap);
     }

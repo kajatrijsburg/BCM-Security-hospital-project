@@ -2,7 +2,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS rol;
 CREATE TABLE rol
 (
-    rolid   int          NOT NULL,
+    rolid   int          NOT NULL AUTO_INCREMENT,
     rolnaam varchar(100) NOT NULL,
     actief  boolean      NOT NULL,
     PRIMARY KEY (rolid)
@@ -11,7 +11,7 @@ CREATE TABLE rol
 DROP TABLE IF EXISTS permissies;
 CREATE TABLE permissies
 (
-    permissieid   int          NOT NULL,
+    permissieid   int          NOT NULL AUTO_INCREMENT,
     permissienaam varchar(100) NOT NULL,
     actief        boolean      NOT NULL,
     PRIMARY KEY (permissieid)
@@ -22,10 +22,10 @@ CREATE TABLE rolpermissies
 (
     rolpermissiesid int NOT NULL AUTO_INCREMENT,
     rolid        int NOT NULL,
-    permiessieid int NOT NULL,
+    permissieid int NOT NULL,
     PRIMARY KEY (rolpermissiesid),
     FOREIGN KEY (rolid) REFERENCES rol (rolid),
-    FOREIGN KEY (permiessieid) REFERENCES permissies(permissieid)
+    FOREIGN KEY (permissieid) REFERENCES permissies(permissieid)
 );
 
 DROP TABLE IF EXISTS user;

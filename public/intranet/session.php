@@ -14,10 +14,12 @@ $time = $timeInMinutes * 60;
 $_SESSION["TIMEOUT"] = time() + $time;
 
 $_SESSION["ROLS"] = getroles();
-$_SESSION["PERMISSIONS"] = get_permissions_name();
+$_SESSION["USER_ID"] = set_userinfo_id();
+$_SESSION["PERMISSIONS"] = get_permissions_name($_SESSION["ROLS"]);
 $_SESSION["V_NAME"] = set_userinfo_vname();
 $_SESSION["A_NAME"] = set_userinfo_aname();
-$_SESSION["USER_ID"] = set_userinfo_id();
+
+
 
 header('location: ' . 'http://energy.org/intranet/Dashboard.php', true);
 exit();
