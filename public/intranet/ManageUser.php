@@ -39,9 +39,15 @@ if (!empty($_POST["addRole"]) && $_POST["addRole"]=="true"){
     $user->addRole($role);
 }
 
-if (!empty($_POST["removeRole"]) && $_POST["addRole"]=="true"){
+if (!empty($_POST["removeRole"]) && $_POST["removeRole"]=="true"){
     $roleName = trimAndClean($_POST["roleToRemove"]);
-    echo $roleName;
+    //we have to extract the name of the role because shit's not properly implemented
+    //todo actually fix this
+    $equalsPos = strpos($roleName, "=") + 1;
+    $len = strpos($roleName, ",") - 3;
+    $roleName = substr($roleName, $equalsPos, $len);
+    $role = Role::byName($roleName);
+    $user->removeRole($role);
 }
 ?>
 
@@ -123,7 +129,16 @@ if (!empty($_POST["removeRole"]) && $_POST["addRole"]=="true"){
                     </thead>
                     <?php
                     foreach ($user->roles as $role){
-                        echo "<tr> <td>" . $role . "</td> <td> <form action='ManageUser.php' method='post'><input type='hidden' value='true' name='removeRole'><input type='hidden' value='$role' name='roleToRemove'><button class='btn btn-warning' type='submit'>Verwijder</form></td></tr>";
+                        echo "<tr> <td>" . $role . "</td>" .
+                            "<td> 
+                                <form action='ManageUser.php' method='post'>
+                                <input type='hidden' value='true' name='removeRole'>
+                                <input type='hidden' value='$role' name='roleToRemove'>
+                                <input type='hidden' value='$id' name='id'>
+                                <button class='btn btn-warning' type='submit'>Verwijder
+                                </form>
+                              </td>
+                              </tr>";
                     }
                     ?>
                 </table>
