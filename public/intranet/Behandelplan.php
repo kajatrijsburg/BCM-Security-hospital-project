@@ -1,4 +1,7 @@
-<?php include_once("../partials/session_part.php"); ?>
+<?php
+include_once("../partials/session_part.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

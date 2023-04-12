@@ -1,5 +1,8 @@
 <?php
 require_once("../php/sql.php");
+require_once("../php/permissies.php");
+include_once("../partials/session_part.php");
+requirePermission($_SESSION, Permissions::$manageAppointments);
 $db = new DataBase();
 $patienten  = $db->getPatientsForSpecialist(1)
 ?>

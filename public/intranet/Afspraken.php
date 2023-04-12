@@ -1,4 +1,8 @@
-<?php include_once("../partials/session_part.php"); ?>
+<?php
+require_once ("../php/permissies.php");
+include_once("../partials/session_part.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,9 +66,9 @@
                         <h1>Afspraken</h1>
 
                         <?php
-                        echo implode($_SESSION["ROLS"]);
+
                         //if the relevant permissions exist
-                        if (true) {
+                        if (!empty($_SESSION["PERMISSIONS"][Permissions::$manageAppointments])) {
                             echo "<a class = \"btn btn-success\" href='MaakAfspraak.php'>Maak een nieuwe afspraak</a>";
                         }
                         ?>
