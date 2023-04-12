@@ -103,6 +103,7 @@ if (!empty($_POST["removeRole"]) && $_POST["removeRole"]=="true"){
         <div class="row flex-nowrap ">
             <? include_once '../partials/sidebar.php';?>
             <div class="col py-3">
+                <!--
                 <form action="ManageUser.php" method="post">
                     <input name="editUser" type="hidden" value="true">
                     <input name="id" type="hidden" value="<? echo $id?>">
@@ -121,6 +122,7 @@ if (!empty($_POST["removeRole"]) && $_POST["removeRole"]=="true"){
                     </div>
                     <button type="submit" class="btn btn-success">Opslaan</button>
                 </form>
+                -->
 
                 <table class="table">
                     <thead>
@@ -142,6 +144,7 @@ if (!empty($_POST["removeRole"]) && $_POST["removeRole"]=="true"){
                     }
                     ?>
                 </table>
+
                 <form action="ManageUser.php" method="post">
                     <input name="addRole" type="hidden" value="true">
                     <input name="id" type="hidden" value="<?echo $id?>">
@@ -156,7 +159,7 @@ if (!empty($_POST["removeRole"]) && $_POST["removeRole"]=="true"){
                     </select>
                     <button type="submit" class="btn btn-success">Voeg toe aan deze gebruiker</button>
                 </form>
-
+                <a class="btn btn-secondary" href="RBAC.php">Terug</a>
             </div>
         </div>
     </div>

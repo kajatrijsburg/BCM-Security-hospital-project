@@ -121,6 +121,54 @@ class DataBase {
             return $this->queryOnce($sql, [$searchValue]);
         }
     }
+
+    function getRolePermissions($rolename){
+        $sql = "SELECT p.permissienaam FROM rol 
+                JOIN rolpermissies rp ON rol.rolid = rp.rolid 
+                JOIN permissies p on rp.permissieid = p.permissieid 
+                WHERE rolnaam = :rolname";
+
+        $statement = $this->queryOnce($sql, [$rolename])->fetchAll();
+
+        if (empty($statement)){
+            return [];
+        }
+        $permissions = [];
+        foreach ($statement as $row){
+            $val = array_pop($row);
+            $permissions[$val] = $val;
+        }
+
+        return $permissions;
+    }
+
+    function updateRolePermissions($rolename, $permissions){
+        //before anything we need the role ID
+        $sql = "SELECT rolid FROM rol WHERE rolnaam = :rolename";
+        $rolid = $this->queryOnce($sql, [$rolename])->fetch();
+        $rolid =  array_pop($rolid);
+        //we're doing this the lazy way
+        //first we just delete all permissions
+        $sql = "DELETE FROM rolpermissies WHERE rolid = :rolid";
+        $this->queryOnce($sql, [$rolid]);
+        //and then we set the permissions we want
+
+        foreach ($permissions as $permissionname => $status){
+            if (empty($status) || $status == false){
+                continue;
+            }
+            $permission = trimAndClean($permissionname); //this prevents a bug somehow
+            //wrong way get the permissionID
+            $sql = "SELECT permissieid FROM permissies WHERE permissienaam = :permission";
+            $permissionid = $this->queryOnce($sql, [$permission])->fetch();
+
+            $permissionid = array_pop($permissionid);
+
+            $sql = "INSERT INTO rolpermissies (rolid, permissieid) VALUES (:rolid, :permissionid)";
+            $this->queryOnce($sql, [$rolid, $permissionid]);
+
+        }
+    }
 }
 
 
