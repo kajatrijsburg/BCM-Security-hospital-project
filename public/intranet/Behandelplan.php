@@ -64,16 +64,27 @@
                         </div>
                         <div class="card-body">
                             <?php
-                            require_once("php/sql.php");
+                            require_once("../php/sql.php");
                             $db = new DataBase();
-                            //placeholder variable.
-                            //When sessions are implemented we should get this variable from the session instead
-                            $behandelplan = $db->getTreatmentPlanForUser(1)->fetch();
-                            echo "<p class=\"card-text\">" . $behandelplan['beschrijving'] . "</p>";
+                            $behandelplan = $db->getTreatmentPlanForUser($_SESSION["USER_ID"])->fetch();
+                            if(empty($behandelplan)){
+                                $text = "<p class=\"card-text\">" . "U heeft nog geen behandelplan" . "</p>";
+                            }else{
+                                $text = "<p class=\"card-text\">" . $behandelplan['beschrijving'] . "</p>";
+                            }
+                           echo $text;
                             ?>
                         </div>
                         <div class="card-footer">
-                            <p class="card-text"> <small class="text-muted"> <?php echo $behandelplan['datum'] ?></small></p>
+                            <?php
+                            if(empty($behandelplan)){
+                                $datum = "...";
+                            }else{
+                                $datum = $behandelplan['datum'];
+                            }
+                            ?>
+
+                            <p class="card-text"> <small class="text-muted"> <?php echo $datum?></small></p>
                         </div>
                     </div>
                     <!--Voedselplan -->

@@ -6,6 +6,7 @@
 //this means that if php code execution is gained attackers will be able to leak credentials
 
 require_once($_SERVER['DOCUMENT_ROOT']."/../credentials.php");
+require_once ("clean-input.php");
 class DataBase {
     private $credentials;
 
@@ -100,11 +101,26 @@ class DataBase {
         }
     }
 
+    function getUser($userEmail){
+        return $this->queryOnce("SELECT * FROM user WHERE email = :email", [$userEmail]);
+    }
+
     function addPatient($specialistid, $patientid){
         $sql = "INSERT INTO patienten (specialistid, patientid) VALUES (:specialistid, :patientid)";
         $this->queryOnce($sql, [$specialistid, $patientid]);
     }
 
+    function getUsers($searchValue){
+
+        if(empty($searchValue)){
+            $sql = "SELECT * FROM user";
+            return $this->queryOnce($sql, []);
+        }else{
+            $searchValue = trimAndClean($searchValue);
+            $sql = "SELECT * FROM user WHERE :searchValue in(voornaam, achternaam, email)";
+            return $this->queryOnce($sql, [$searchValue]);
+        }
+    }
 }
 
 
