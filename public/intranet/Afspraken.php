@@ -60,10 +60,12 @@
                 <div class="container">
                     <div>
                         <h1>Afspraken</h1>
+
                         <?php
+                        echo implode($_SESSION["ROLS"]);
                         //if the relevant permissions exist
                         if (true) {
-                            echo "<a class = \"btn btn-success\">Maak een nieuwe afspraak</a>";
+                            echo "<a class = \"btn btn-success\" href='MaakAfspraak.php'>Maak een nieuwe afspraak</a>";
                         }
                         ?>
 
