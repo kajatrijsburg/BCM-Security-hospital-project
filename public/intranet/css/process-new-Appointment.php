@@ -50,6 +50,7 @@ if(!($input["Online"] == 0 || $input["Online"] == 1)){
 //get the specialistid from the session
 $db = new DataBase();
 $db->addAppointment($input["Locatie"], $input["Online"], $input["Datum"], $input["Tijd"], $specialistID, $input["Patient"]);
+$db->log($_SESSION, "maakte een afspraak voor: " . $input["Patient"]);
 $db = null;
 
 //header('location: ' . 'http://energy.org/intranet/Afspraken.php', true);

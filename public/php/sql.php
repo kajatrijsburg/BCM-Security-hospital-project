@@ -178,6 +178,20 @@ class DataBase {
 
         }
     }
+
+    function log($session, $action){
+        $id = $this->getUserID($session["USER_ID"]);
+        $date = date("Y-m-d");
+        $time = date("H:i:s");
+
+        $sql = "INSERT INTO gebruikgeschiedenis (actie, userid, datum, tijd) VALUES (:action, :id, :date, :time)";
+        $this->queryOnce($sql, [$action, $id, $date, $time]);
+    }
+
+    function getLog(){
+        $sql = "SELECT datum, tijd, u.email, actie FROM gebruikgeschiedenis JOIN user u on u.userid = gebruikgeschiedenis.userid";
+        return $this->queryOnce($sql, []);
+    }
 }
 
 

@@ -1,10 +1,12 @@
 <?php
+require_once("../php/sql.php");
 include_once("../partials/session_part.php");
-require_once("../php/permissies.php");
-?>
+require_once ("../php/permissies.php");
 
-<!DOCTYPE html>
-<html lang="en">
+$db = new DataBase();
+?>
+    <!DOCTYPE html>
+    <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,8 +20,7 @@ require_once("../php/permissies.php");
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
 
-
-    <title>Frontend Bootcamp</title>
+    <title>ESALA</title>
 </head>
 <body>
 <header>
@@ -49,23 +50,42 @@ require_once("../php/permissies.php");
                     loading="lazy"
                 />
             </a>
+
+
+
+
+
+            <!-- Container wrapper -->
     </nav>
     <!-- Navbar -->
+    <!-- Sidebar -->
     <div class="container-fluid ">
         <div class="row flex-nowrap ">
             <? include_once '../partials/sidebar.php';?>
-            <div>
+            <div class="col py-3">
+               <table class="table">
+                   <thead>
+                       <th>Actie</th>
+                       <th>gebruiker</th>
+                       <th>Tijd</th>
+                       <th>Datum</th>
 
-                <?php
-                if(hasPermission($_SESSION, Permissions::$manageRoles)){
-                    echo "<div class='m-3'><a class='btn btn-success' href='ManageRoles.php'>Beheer rollen</a></div>";
-                }
-                if(hasPermission($_SESSION, Permissions::$managePermissions)){
-                    echo "<div class='m-3'><a class='btn btn-success' href='RBAC.php'>Beheer gebruikers</a></div>";
-                }
-                ?>
-                <div class='m-3'><a class='btn btn-success' href='Log.php'>bekijk log</a></div>
+                   </thead>
 
+                   <?php
+                   $log = $db->getLog();
+                   foreach ($log as $entry){
+                       echo "<tr>";
+                       echo"<td>" . array_pop($entry) . "</td>";
+                       echo"<td>" . array_pop($entry) . "</td>";
+                       echo"<td>" . array_pop($entry) . "</td>";
+                       echo"<td>" . array_pop($entry) . "</td>";
+
+                       echo "</tr>";
+
+                   }
+                   ?>
+               </table>
             </div>
         </div>
     </div>
@@ -85,4 +105,4 @@ require_once("../php/permissies.php");
 
 
 </body>
-</html>
+    </html><?php

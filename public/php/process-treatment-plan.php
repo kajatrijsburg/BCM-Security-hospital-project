@@ -13,5 +13,6 @@ $db = new DataBase();
 
 $date = date("Y-m-d");
 $db->addTreatmentPlan($id, $description, $date);
+$db->log($_SESSION, "updated a treatmentplan for: " . $id);
 
 header('location: ' . 'http://energy.org/intranet/Behandelplan.php', true);
